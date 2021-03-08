@@ -1,8 +1,9 @@
-<div class="container">
+<div class="container" style="padding-top: 10px;">
+  {{> weixin}}
   <div class="row">
     <div class="col-md-9">
       <ol class="breadcrumb">
-        <li><a href="/">首页</a></li>
+        <li><a href="/">柚子首页</a></li>
         {{#foreach category.breadcrumb}}
           <li><a href="{{path}}">{{name}}</a></li>
         {{/foreach}}
@@ -25,9 +26,10 @@
         {{/foreach}}
       </div>
     </div>
-    <div class="col-md-3 hidden-xs hidden-sm">
+    {{!-- <div class="col-md-3 hidden-xs hidden-sm"> --}}
+    <div class="col-md-3">
       <div class="panel panel-default">
-        <div class="panel-heading">频道阅读总排行</div>
+        <div class="panel-heading">热度总排行</div>
         <ul class="list-group">
           {{#foreach readingList.total limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
@@ -35,15 +37,15 @@
         </ul>
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">频道阅读本月排行</div>
+        <div class="panel-heading">热度本月排行</div>
         <ul class="list-group">
           {{#foreach readingList.month limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">频道阅读本周排行</div>
+      {{!-- <div class="panel panel-default">
+        <div class="panel-heading">频道热度本周排行</div>
         <ul class="list-group">
           {{#foreach readingList.week limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
@@ -51,13 +53,14 @@
         </ul>
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">频道阅读今日排行</div>
+        <div class="panel-heading">频道热度今日排行</div>
         <ul class="list-group">
           {{#foreach readingList.day limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
+      --}}
     </div>
   </div>
 </div>

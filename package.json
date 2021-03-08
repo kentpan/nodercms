@@ -1,23 +1,17 @@
 {
-  "name": "nodercms",
-  "description": "CMS内容管理系统",
+  "name": "yoozcms",
+  "description": "YOOZ CMS内容管理系统",
   "version": "1.4.2",
   "author": {
-    "name": "Welkin Wong",
-    "email": "welkin.wong@me.com"
+    "name": "kent",
+    "email": "ayue222@126.com"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/welkinwong/nodercms.git"
+    "url": "https://github.com/kentpan/nodercms.git"
   },
-  "homepage": "https://www.nodercms.com",
-  "keywords": [
-    "NoderCMS",
-    "node cms",
-    "CMS",
-    "cms"
-  ],
+  "keywords": [],
   "dependencies": {
     "async": "^1.5.2",
     "bluebird": "^3.4.6",
@@ -61,9 +55,7 @@
   "mongodb": ">=3.0.6",
   "main": "bin/www",
   "scripts": {
-    "start": "node ./bin/www"
-  },
-  "bugs": {
-    "url": "https://github.com/welkinwong/nodercms/issues"
+    "start": "gulp default && node ./bin/www",
+    "build": "gulp build && node ./bin/www"
   }
 }

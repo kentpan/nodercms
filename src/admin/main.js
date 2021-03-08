@@ -330,6 +330,18 @@ angular.module('nodercms', [
         }
       })
 
+      // // 单页配置
+      // .state('main.pages.one', {
+      //   url: '^/admin/setting/feature-models',
+      //   controller: 'featureModels',
+      //   templateProvider: ['$templateCache', function($templateCache) {
+      //     return $templateCache.get('feature-models.view.html');
+      //   }],
+      //   resolve: {
+      //     checkAuth: ['checkAuthResolve', function (resolve) { return resolve('featureModels', 'read') }]
+      //   }
+      // })
+
       // 角色权限
       .state('main.roles', {
         url: '^/admin/setting/roles',

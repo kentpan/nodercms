@@ -64,7 +64,11 @@ exports.update = function (req, res) {
     keywords: req.body.keywords,
     description: req.body.description,
     codeHeader: req.body.codeHeader,
-    codeFooter: req.body.codeFooter
+    codeFooter: req.body.codeFooter,
+    codeWeixin: req.body.codeWeixin,
+    weixinQR: req.body.weixinQR,
+    weixin: req.body.weixin,
+    phoneCode: req.body.phoneCode
   };
 
   async.parallel([

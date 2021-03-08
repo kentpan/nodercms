@@ -16,6 +16,10 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
     $scope.description = '';
     $scope.codeHeader = '';
     $scope.codeFooter = '';
+    $scope.codeWeixin = '';
+    $scope.weixinQR = '';
+    $scope.weixin = '';
+    $scope.phoneCode = '';
     $scope.editAuth = false;
     $scope.readAuth = false;
 
@@ -45,6 +49,10 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
         $scope.description = result.siteInfo.description;
         $scope.codeHeader = result.siteInfo.codeHeader;
         $scope.codeFooter = result.siteInfo.codeFooter;
+        $scope.codeWeixin = result.siteInfo.codeWeixin;
+        $scope.weixinQR = result.siteInfo.weixinQR;
+        $scope.weixin = result.siteInfo.weixin;
+        $scope.phoneCode = result.siteInfo.phoneCode;
 
         $scope.transmitting = false;
       })
@@ -67,7 +75,11 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
         keywords: $scope.keywords,
         description: $scope.description,
         codeHeader: $scope.codeHeader,
-        codeFooter: $scope.codeFooter
+        codeFooter: $scope.codeFooter,
+        codeWeixin: $scope.codeWeixin,
+        weixinQR: $scope.weixinQR,
+        weixin: $scope.weixin,
+        phoneCode: $scope.phoneCode
       })
       .success(function () {
         $scope.transmitting = false;

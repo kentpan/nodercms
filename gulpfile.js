@@ -159,7 +159,7 @@ gulp.task('concat-admin-js-less', ['clean'], function () {
 /**
  * 合并 admin views
  */
-gulp.task('concat-admin-views', function () {
+gulp.task('concat-admin-views', ['clean'], function () {
   return gulp.src('./src/admin/views/*.html')
     .pipe(templateCache({
       module: 'views',
@@ -198,9 +198,14 @@ gulp.task('watch-assets-admin', function () {
 /**
  * 默认开发模式编译
  */
-gulp.task('default', ['watch-assets-admin', 'build-admin-assets', 'concat-vendor-js', 'concat-vendor-css', 'concat-admin-js', 'concat-admin-views', 'copy-admin-assets', 'copy-admin-font-awersome-fonts']);
+gulp.task('default', ['watch-assets-admin', 'build-admin-assets', 'concat-vendor-js', 'concat-vendor-css', 'concat-admin-js', 'concat-admin-views', 'copy-admin-assets', 'copy-admin-font-awersome-fonts'], function () {
+  process.exit();
+});
 
 /**
  * 生产模式编译
  */
-gulp.task('build', ['build-admin-assets-less', 'concat-vendor-js-less', 'concat-vendor-css-less', 'concat-admin-js-less', 'concat-admin-views', 'copy-admin-assets', 'copy-admin-font-awersome-fonts']);
+gulp.task('build', ['build-admin-assets-less', 'concat-vendor-js-less', 'concat-vendor-css-less', 'concat-admin-js-less', 'concat-admin-views', 'copy-admin-assets', 'copy-admin-font-awersome-fonts'], function () {
+  process.exit();
+});
+// process.exit();

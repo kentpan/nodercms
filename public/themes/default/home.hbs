@@ -1,9 +1,10 @@
-<div class="container">
+<div class="container" style="padding-top: 10px;">
+  {{>features}}
+  {{>weixin}}
   <div class="row">
-    <div class="col-md-9">
-      <div class="row">
-        {{#foreach lists}}
-          <div class="col-md-6">
+    <div class="col-md-9" style="margin-bottom: 20px;">
+        {{!-- {{#foreach lists}}
+          <div class="col-md-12">
             <div class="panel panel-less">
               <div class="panel-heading">
                 {{name}}
@@ -16,12 +17,35 @@
               </div>
             </div>
           </div>
+        {{/foreach}} --}}
+        {{#foreach lists}}
+          {{#if contents}}
+          <ol class="breadcrumb">
+            <li style="font-weight: 600;">{{name}}</li>
+          </ol>
+          {{/if}}
+          {{#foreach contents}}
+            <div class="media">
+              <h3 class="media-heading text-overflow margin-bottom-10"><a href="{{href}}" title="{{title}}" target="_blank">{{title}}</a></h3>
+              {{#if thumbnail}}
+                <div class="media-left">
+                  <img class="media-object" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}" width="100">
+                </div>
+              {{/if}}
+              <div class="media-body text-muted">
+                {{#if abstract}}
+                  <p class="media-abstract"><a href="{{href}}" title="{{title}}" target="_blank">{{abstract}}</a></p>
+                {{/if}}
+                <p{{#if abstract}} class="article-bottom"{{/if}}><span>{{dateformat date format="YYYY年MM月DD日 HH:mm"}}</span><span class="pull-right">热度：{{reading.total}}</span></p>
+              </div>
+            </div>
+          {{/foreach}}
         {{/foreach}}
-      </div>
     </div>
-    <div class="col-md-3 hidden-xs hidden-sm">
+    {{!-- <div class="col-md-3 hidden-xs hidden-sm"> --}}
+    <div class="col-md-3">
       <div class="panel panel-default">
-        <div class="panel-heading">阅读总排行</div>
+        <div class="panel-heading">热度总排行</div>
         <ul class="list-group">
           {{#foreach readingList.total limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
@@ -29,15 +53,15 @@
         </ul>
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">阅读本月排行</div>
+        <div class="panel-heading">热度本月排行</div>
         <ul class="list-group">
           {{#foreach readingList.month limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">阅读本周排行</div>
+      {{!-- <div class="panel panel-default">
+        <div class="panel-heading">热度本周排行</div>
         <ul class="list-group">
           {{#foreach readingList.week limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
@@ -45,13 +69,13 @@
         </ul>
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">阅读今日排行</div>
+        <div class="panel-heading">热度今日排行</div>
         <ul class="list-group">
           {{#foreach readingList.day limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
-      </div>
+      </div>--}}
     </div>
   </div>
 </div>

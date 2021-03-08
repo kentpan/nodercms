@@ -7,7 +7,7 @@ angular.module('services').factory('checkSignIn', ['$rootScope', '$state', 'ipCo
     
     return function () {
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-        if (!ipCookie('nodercmsSid') && toState.name !== 'signIn' && toState.name !== 'install') {
+        if (!ipCookie('yoozwebsiteSid') && toState.name !== 'signIn' && toState.name !== 'install') {
           event.preventDefault();
           $state.go('signIn');
         }

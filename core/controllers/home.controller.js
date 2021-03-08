@@ -3,6 +3,7 @@ var _ = require('lodash');
 var siteInfoService = require('../services/site-info.service');
 var categoriesService = require('../services/categories.service');
 var listsService = require('../services/lists.service');
+var featuresService = require('../services/features.service');
 
 /**
  * 首页
@@ -15,6 +16,7 @@ module.exports = function (req, res) {
     navigation: function (callback) {
       categoriesService.navigation({ current: '/' }, callback);
     },
+    features: featuresService.all,
     lists: listsService.all,
     readingTotal: function (callback) {
       listsService.reading({}, callback);
@@ -30,11 +32,12 @@ module.exports = function (req, res) {
     }
   }, function (err, results) {
     if (err) return res.status(500).end();
-
+    console.log(results.siteInfo);
     res.render('home', {
       layout: 'layout-default',
       siteInfo: results.siteInfo,
       navigation: results.navigation,
+      features: results.features,
       lists: results.lists,
       readingList: {
         total: results.readingTotal,

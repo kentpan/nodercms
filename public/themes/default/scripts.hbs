@@ -1,0 +1,18 @@
+<script>
+$(document).ready(function(){
+     var targetText=$("#weixinCode").text();
+     var clipboard = new Clipboard('#copy_btn');
+     clipboard.on('success', function(e) {
+           // console.info('Action:', e.action);
+           // console.info('Text:', e.text);
+           // console.info('Trigger:', e.trigger);
+           // alert("复制成功");
+           console.log('复制成功', targetText, e);
+           e.trigger.value = '复制成功';
+           e.clearSelection();
+            setTimeout(function() {
+              e.trigger.value = '点击复制微信号';
+            }, 3000);
+       });
+ });
+</script>

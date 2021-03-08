@@ -3,8 +3,8 @@ var mongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 
 module.exports = {
-  secret: 'nodercms',
-  name: 'nodercmsSid',
+  secret: 'yoozwebsite',
+  name: 'yoozwebsiteSid',
   cookie: {
     httpOnly: false
   },

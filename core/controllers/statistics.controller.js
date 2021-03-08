@@ -42,11 +42,11 @@ module.exports = function (req, res) {
       mongodb: results.mongodb
     };
 
-    request({
-      url: 'http://console.nodercms.com/openApi/sites',
-      method: 'POST',
-      body: data,
-      json: true
-    });
+    // request({
+    //   url: 'http://console.nodercms.com/openApi/sites',
+    //   method: 'POST',
+    //   body: data,
+    //   json: true
+    // });
   });
 };

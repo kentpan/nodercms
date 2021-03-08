@@ -57,6 +57,38 @@
           <span class="help-block">这里的代码将注入到网站每一个页面底部</span>
         </div>
       </div>
+      <div class="form-group">
+        <label for="textareaWeixinQR" class="col-sm-2 control-label">微信二维码：</label>
+        <div class="col-sm-10">
+          <textarea ng-if="editAuth" ng-model="$parent.weixinQR" ng-disabled="transmitting" class="form-control" id="textareaWeixinQR" name="weixinQR" rows="4" placeholder="例：<img src=\"/media/202103/60420582521e6625fa46eed7/vivian-yoooz-5.jpg\" alt=\"电子烟,YOOZ,YOOZ柚子,YOOZ电子烟官网,YOOZ加盟,YOOZ烟弹,YOOZ代理,微信：vivian-yoooz\">"><img src=\"/media/202103/60420582521e6625fa46eed7/vivian-yoooz-5.jpg\" alt=\"电子烟,YOOZ,YOOZ柚子,YOOZ电子烟官网,YOOZ加盟,YOOZ烟弹,YOOZ代理,微信：vivian-yoooz\"></textarea>
+          <pre ng-if="readAuth && !editAuth" class="pre-scrollable">{{weixinQR}}</pre>
+          <span class="help-block">微信二维码图片</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputWeixin" class="col-sm-2 control-label">推广微信号：</label>
+        <div class="col-sm-10">
+          <input ng-if="editAuth" ng-model="$parent.weixin" ng-disabled="transmitting" class="form-control" id="inputWeixin" name="weixinQR" rows="4" placeholder="例：vivian-yoooz">
+          <pre ng-if="readAuth && !editAuth" class="pre-scrollable">{{weixin}}</pre>
+          <span class="help-block">微信号</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPhoneCode" class="col-sm-2 control-label">推广手机号：</label>
+        <div class="col-sm-10">
+          <input ng-if="editAuth" ng-model="$parent.phoneCode" ng-disabled="transmitting" class="form-control" id="inputPhoneCode" name="phoneCode" rows="4" placeholder="例：18612410076">
+          <pre ng-if="readAuth && !editAuth" class="pre-scrollable">{{phoneCode}}</pre>
+          <span class="help-block">手机号码</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="textareaCodeWeixin" class="col-sm-2 control-label">文末推广微信：</label>
+        <div class="col-sm-10">
+          <textarea ng-if="editAuth" ng-model="$parent.codeWeixin" ng-disabled="transmitting" class="form-control" id="textareaCodeWeixin" name="codeWeixin" rows="4" placeholder="例：<div>微信号：vivian-yoooz</div>"></textarea>
+          <pre ng-if="readAuth && !editAuth" class="pre-scrollable">{{codeWeixin}}</pre>
+          <span class="help-block">文章结尾微信广告代码</span>
+        </div>
+      </div>
     </div>
   </div>
   <button ng-if="editAuth" ng-disabled="siteInfoForm.$invalid || transmitting" class="btn btn-primary pull-right" type="submit"><i class="fa fa-save"></i> 保存配置</button>

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/themes/{{siteInfo.theme}}/assets/css/main.css" />
     <script src="/themes/{{siteInfo.theme}}/assets/js/jquery-2.2.1.min.js"></script>
     <script src="/themes/{{siteInfo.theme}}/assets/js/bootstrap.min.js"></script>
+    <script src="/themes/{{siteInfo.theme}}/assets/js/clipboard-1.5.12.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,11 +26,7 @@
     <br>
     <br>
     <br>
-    <div class="jumbotron clear-bottom-margin">
-      <div class="container text-center text-muted">
-        {{{siteInfo.codeFooter}}}
-        <small>Powered by <a href="http://www.nodercms.com" title="轻量级CMS内容管理系统" target="_blank">NoderCMS</a></small>
-      </div>
-    </div>
+    {{> footer}}
+    {{> scripts}}
   </body>
 </html>

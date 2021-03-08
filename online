@@ -1,0 +1,24 @@
+#!/bin/bash
+
+projectName="yoozcms"
+
+echo -e "\033[41;37m ======= 开始 ${projectName} online 部署，请按任意键继续或者CTRL+C取消 ======= \033[0m \n"
+read -n 1
+
+
+#unset NODE_DEBUG
+#unset YOG_DEBUG
+#unset YOG_ENV
+#unset PORT
+
+echo -e "开始部署服务：\033[35m ${projectName} \033[0m"
+
+gulp build
+
+pm2 del ${projectName}
+
+pm2 start 'node ./bin/www' --name ${projectName}
+
+echo -e "\033[42;30m ${projectName} online 部署成功！ \033[0m \n\n"
+
+exit

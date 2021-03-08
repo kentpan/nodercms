@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <ol class="breadcrumb">
-        <li><a href="/">首页</a></li>
+        <li><a href="/">柚子首页</a></li>
         <li class="active">搜索</li>
       </ol>
       {{#foreach list.contents}}
@@ -17,7 +17,7 @@
             {{#if abstract}}
               <p>{{abstract}}</p>
             {{/if}}
-            <p><span>{{dateformat date format="YYYY年MM月DD日 HH:mm"}}</span><span class="pull-right">阅读量：{{reading.total}}</span></p>
+            <p><span>{{dateformat date format="YYYY年MM月DD日 HH:mm"}}</span><span class="pull-right">热度：{{reading.total}}</span></p>
           </div>
         </div>
         <hr>
@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-3 hidden-xs hidden-sm">
       <div class="panel panel-default">
-        <div class="panel-heading">栏目阅读总排行</div>
+        <div class="panel-heading">热度总排行</div>
         <ul class="list-group">
           {{#foreach readingList.total limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
@@ -42,15 +42,15 @@
         </ul>
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">栏目阅读本月排行</div>
+        <div class="panel-heading">热度本月排行</div>
         <ul class="list-group">
           {{#foreach readingList.month limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">栏目阅读本周排行</div>
+      {{!-- <div class="panel panel-default">
+        <div class="panel-heading">栏目热度本周排行</div>
         <ul class="list-group">
           {{#foreach readingList.week limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
@@ -58,13 +58,14 @@
         </ul>
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">栏目阅读今日排行</div>
+        <div class="panel-heading">栏目热度今日排行</div>
         <ul class="list-group">
           {{#foreach readingList.day limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
+      --}}
     </div>
   </div>
 </div>
