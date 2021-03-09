@@ -32,7 +32,7 @@
           <div ng-if="model.system.url" ng-class="{ 'has-error': featureForm.url.$touched && featureForm.url.$invalid }" class="form-group">
             <label for="url" class="col-sm-2 control-label">链接：</label>
             <div class="col-sm-10">
-              <input ng-model="$parent.url" ng-disabled="transmitting" type="url" class="form-control" id="url" name="url" placeholder="请输入链接">
+              <input ng-model="$parent.url" ng-disabled="transmitting" type="text" class="form-control" id="url" name="url" placeholder="请输入链接">
             </div>
           </div>
           <div ng-repeat="item in model.extensions" ng-class="{ 'has-error': featureForm.input{{item.key}}.$touched && featureForm.input{{item.key}}.$invalid, 'extensions-media': item.type === 'media' }" class="form-group">

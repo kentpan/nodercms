@@ -24,11 +24,11 @@ module.exports = function (req, res, next) {
     logger.system().error(__filename, '参数验证失败', req.validationErrors());
     return res.status(400).end();
   }
-
   categoriesService.one({
     path: '/' + req.params.column + req.params[0],
     type: 'column'
   }, function (err, category) {
+    console.log(req.params, category);
     if (err) return res.status(500).end();
 
     if (!category) return next();
@@ -73,12 +73,12 @@ module.exports = function (req, res, next) {
       localReadingTotal: function (callback) {
         listsService.reading({ _id: category._id }, callback);
       },
-      localReadingDay: function (callback) {
-        listsService.reading({ _id: category._id, sort: '-reading.day' }, callback);
-      },
-      localReadingWeek: function (callback) {
-        listsService.reading({ _id: category._id, sort: '-reading.week' }, callback);
-      },
+      // localReadingDay: function (callback) {
+      //   listsService.reading({ _id: category._id, sort: '-reading.day' }, callback);
+      // },
+      // localReadingWeek: function (callback) {
+      //   listsService.reading({ _id: category._id, sort: '-reading.week' }, callback);
+      // },
       localReadingMonth: function (callback) {
         listsService.reading({ _id: category._id, sort: '-reading.month' }, callback);
       }
@@ -93,8 +93,8 @@ module.exports = function (req, res, next) {
         list: results.list,
         readingList: {
           total: results.localReadingTotal,
-          day: results.localReadingDay,
-          week: results.localReadingWeek,
+          // day: results.localReadingDay,
+          // week: results.localReadingWeek,
           month: results.localReadingMonth
         }
       });

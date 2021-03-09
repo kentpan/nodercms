@@ -8,7 +8,12 @@
       <ul class="nav navbar-nav navbar-left">
         {{#foreach navigation}}
           {{#if isShow}}
-            <li class="{{#if current}}active{{/if}}"><a href="{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}" title="{{name}}" style="line-height: 35px;">{{name}}</a></li>
+            <li class="{{#if nodes}}dropdown {{/if}}{{#if current}}active{{/if}}">
+              <a href="{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}" title="{{name}}" style="line-height: 35px;">{{name}}</a>
+              {{#if nodes}}
+              <ul class="dropdown-menu">{{#foreach nodes}}{{#if isShow}}<li class="{{#if current}}active{{/if}}"><a href="{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}" title="{{name}}">{{name}}</a></li>{{/if}}{{/foreach}}</ul>
+              {{/if}}
+            </li>
           {{/if}}
         {{/foreach}}
       </ul>
@@ -26,7 +31,7 @@
     </div>
   </div>
 </div>
-<nav class="navbar navbar-blue hidden-md hidden-sm hidden-lg">
+<nav class="navbar navbar-blue hidden-md hidden-sm hidden-lg" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -39,10 +44,15 @@
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-left">
+      <ul class="nav navbar-nav navbar-left" role="navigation">
         {{#foreach navigation}}
           {{#if isShow}}
-            <li class="{{#if current}}active{{/if}}"><a href="{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}" title="{{name}}">{{name}}</a></li>
+            <li class="{{#if current}}active{{#if nodes}} has-sub{{/if}}{{/if}}">
+              <a href="{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}" title="{{name}}">{{name}}</a>
+              {{#if nodes}}
+              <ul class="nav navbar-nav" style="padding: 0 25px;">{{#foreach nodes}}{{#if isShow}}<li class="{{#if current}}active{{/if}}"><a href="{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}" title="{{name}}">{{name}}</a></li>{{/if}}{{/foreach}}</ul>
+              {{/if}}
+            </li>
           {{/if}}
         {{/foreach}}
       </ul>
@@ -59,17 +69,3 @@
     </div>
   </div>
 </nav>
-{{#foreach navigation}}
-  {{#if current}}
-    {{#if nodes}}
-      <div class="container">
-        <div class="navbar-sub-category">
-          {{#foreach nodes}}
-            <a class="btn btn-link" href="{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}" title="{{name}}" role="button">{{name}}</a>
-          {{/foreach}}
-        </div>
-        <hr>
-      </div>
-    {{/if}}
-  {{/if}}
-{{/foreach}}

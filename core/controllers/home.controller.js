@@ -19,31 +19,53 @@ module.exports = function (req, res) {
     features: featuresService.all,
     lists: listsService.all,
     readingTotal: function (callback) {
-      listsService.reading({}, callback);
+      listsService.reading({path: '/news'}, callback);
     },
-    readingDay: function (callback) {
-      listsService.reading({ sort: '-reading.day' }, callback);
-    },
-    readingWeek: function (callback) {
-      listsService.reading({ sort: '-reading.week' }, callback);
-    },
+    // readingDay: function (callback) {
+    //   listsService.reading({ sort: '-reading.day' }, callback);
+    // },
+    // readingWeek: function (callback) {
+    //   listsService.reading({ sort: '-reading.week' }, callback);
+    // },
     readingMonth: function (callback) {
-      listsService.reading({ sort: '-reading.month' }, callback);
+      listsService.reading({ path: '/news', sort: '-reading.month' }, callback);
+    },
+    readingProdTotal: function (callback) {
+      listsService.reading({path: '/product'}, callback);
+    },
+    readingProdMonth: function (callback) {
+      listsService.reading({ path: '/product', sort: '-reading.month' }, callback);
     }
   }, function (err, results) {
     if (err) return res.status(500).end();
-    console.log(results.siteInfo);
     res.render('home', {
       layout: 'layout-default',
       siteInfo: results.siteInfo,
       navigation: results.navigation,
       features: results.features,
-      lists: results.lists,
+      lists: results.lists.map(function (item) {
+          var contents = item.contents || [];
+          console.log(contents);
+          var newItem = {
+            ...item,
+            contents: contents.map(function (cont) {
+               var newContent = {
+                 ...cont,
+                 isArticle: cont.category.path === '/news',
+                 isProduct: cont.category.path === '/product'
+               };
+               return newContent;
+            })
+          };
+          return newItem;
+      }),
       readingList: {
         total: results.readingTotal,
-        day: results.readingDay,
-        week: results.readingWeek,
-        month: results.readingMonth
+        // day: results.readingDay,
+        // week: results.readingWeek,
+        month: results.readingMonth,
+        prodTotal: results.readingProdTotal,
+        prodMonth: results.readingProdMonth
       }
     });
   });

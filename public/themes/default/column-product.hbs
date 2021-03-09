@@ -1,0 +1,110 @@
+<div class="container" style="padding-top: 10px;">
+  {{> weixin}}
+  <div class="row">
+    <div class="col-md-9">
+      <ol class="breadcrumb">
+        <li><a href="/">柚子首页</a></li>
+        {{#foreach category.breadcrumb}}
+          <li><a href="{{path}}">{{name}}</a></li>
+        {{/foreach}}
+        <li class="active">{{category.name}}</li>
+      </ol>
+      {{#foreach list.contents}}
+        {{!-- <div class="media">
+          <h3 class="media-heading text-overflow margin-bottom-10"><a href="{{url}}" title="{{title}}" target="_blank">{{title}}</a></h3>
+          {{#if thumbnail}}
+            <div class="media-left">
+              <img class="media-object" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}" width="100">
+            </div>
+          {{/if}}
+          <div class="media-body text-muted">
+            {{#if abstract}}
+              <p class="media-abstract"><a href="{{url}}" title="{{title}}" target="_blank">{{abstract}}</a></p>
+            {{/if}}
+            <p {{#if abstract}}class="article-bottom"{{/if}}><span>{{dateformat date format="YYYY年MM月DD日 HH:mm"}}</span><span class="pull-right">热度：{{reading.total}}</span></p>
+          </div>
+        </div> --}}
+        <div class="media col-md-12 yooz-product" style="border-radius: 3px;margin-bottom: 20px;padding: 10px;box-shadow: 0 1px 3px rgba(0,0,0,.5);">
+          {{#if thumbnail}}
+            <a href="{{url}}" title="{{title}}" target="_blank" class="media-left">
+              <img class="media-object" style="box-shadow: none;width: 200px;" src="{{thumbnail.src}}" title="{{title}}" alt="{{thumbnail.description}}">
+              <em>人气：{{reading.total}}</em>
+            </a>
+          {{/if}}
+          <div class="media-body text-muted">
+            <h4 class="media-heading text-overflow margin-bottom-10" style="white-space: normal;">
+              <a href="{{url}}" title="{{title}}" target="_blank">{{title}}</a>
+            </h4>
+            {{#if abstract}}
+              <p class="media-abstract">{{{abstract}}}</p>
+            {{/if}}
+            {{#if extensions.types}}<p>类型：{{extensions.types}}</p>{{/if}}
+            {{#if extensions.g_face}}<p>外观：{{extensions.g_face}}</p>{{/if}}
+            {{#if extensions.ration}}<p>尼古丁含量：{{extensions.ration}}</p>{{/if}}
+            <p class="show_price">
+              {{#if extensions.common_price}}<span>官方统一零售价：<strong>￥{{extensions.common_price}}</strong></span>{{/if}}
+              <span class="pull-right">咨询底价：<input type="button" data-clipboard-action="copy" data-clipboard-target="#weixinCode" class="get_price_btn" value="点击复制微信号咨询"/></span>
+            </p>
+          </div>
+        </div>
+      {{/foreach}}
+      {{#if list.pagination}}
+      <nav class="text-center">
+        <ul class="pagination">
+          {{#foreach list.pagination}}
+            <li {{#if active}}class="active"{{/if}}>
+              <a href="{{url}}">{{name}}</a>
+            </li>
+          {{/foreach}}
+        </ul>
+      </nav>
+      {{/if}}
+    </div>
+    {{!-- <div class="col-md-3 hidden-xs hidden-sm"> --}}
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">人气总榜单</div>
+        <ul class="list-group">
+          {{#foreach readingList.total limit="5"}}
+            <a href="{{href}}" class="list-group-item text-overflow" style="text-align: center;">
+              {{#if thumbnail}}
+                <img class="media-object" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}" width="100%">
+              {{/if}}
+              <h6>{{title}}</h6>
+            </a>
+          {{/foreach}}
+        </ul>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">人气月榜单</div>
+        <ul class="list-group">
+          {{#foreach readingList.month limit="5"}}
+            <a href="{{href}}" class="list-group-item text-overflow" style="text-align: center;">
+              {{#if thumbnail}}
+                <img class="media-object" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}" width="100%">
+              {{/if}}
+              <h6>{{title}}</h6>
+            </a>
+          {{/foreach}}
+        </ul>
+      </div>
+      {{!-- <div class="panel panel-default">
+        <div class="panel-heading">栏目热度本周排行</div>
+        <ul class="list-group">
+          {{#foreach readingList.week limit="5"}}
+            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+          {{/foreach}}
+        </ul>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">栏目热度今日排行</div>
+        <ul class="list-group">
+          {{#foreach readingList.day limit="5"}}
+            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+          {{/foreach}}
+        </ul>
+      </div>
+      --}}
+    </div>
+  </div>
+</div>
