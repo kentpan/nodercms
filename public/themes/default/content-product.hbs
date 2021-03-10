@@ -25,10 +25,11 @@
             {{/if}}
             {{#if extensions.types}}<p>类型：{{extensions.types}}</p>{{/if}}
             {{#if extensions.g_face}}<p>外观：{{extensions.g_face}}</p>{{/if}}
+            {{#if extensions.taste}}<p>烟弹口味：{{extensions.taste}}</p>{{/if}}
             {{#if extensions.ration}}<p>尼古丁含量：{{extensions.ration}}</p>{{/if}}
             <p class="show_price">
-              {{#if extensions.common_price}}<span>官方统一零售价：<strong>￥{{extensions.common_price}}</strong></span>{{/if}}
-              <span class="pull-right">咨询底价：<input type="button" data-clipboard-action="copy" data-clipboard-target="#weixinCode" class="get_price_btn" value="点击复制微信号咨询"/></span>
+              {{#if extensions.common_price}}<span>统一零售价：<strong>￥{{extensions.common_price}}</strong></span>{{/if}}
+              <span class="pull-right">询底价：<input type="button" data-clipboard-action="copy" data-clipboard-target="#weixinCode" class="get_price_btn" value="点击复制微信号咨询"/></span>
             </p>
           </div>
       </div>
