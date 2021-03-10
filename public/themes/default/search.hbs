@@ -9,15 +9,26 @@
         <div class="media">
           <h3 class="media-heading text-overflow margin-bottom-10"><a href="{{url}}" title="{{title}}" target="_blank">{{title}}</a></h3>
           {{#if thumbnail}}
-            <div class="media-left">
-              <img class="media-object" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}" width="100">
-            </div>
+            <a class="media-left" href="{{url}}" title="{{title}}" target="_blank">
+              <img class="media-object" style="width: 200px" src="{{thumbnail.src}}" title="{{title}}" alt="{{title}}">
+              <em>人气：{{reading.total}}</em>
+            </a>
           {{/if}}
           <div class="media-body text-muted">
             {{#if abstract}}
               <p>{{abstract}}</p>
             {{/if}}
-            <p><span>{{dateformat date format="YYYY年MM月DD日 HH:mm"}}</span><span class="pull-right">热度：{{reading.total}}</span></p>
+            {{#if extensions.types}}<p>类型：{{extensions.types}}</p>{{/if}}
+            {{#if extensions.g_face}}<p>外观：{{extensions.g_face}}</p>{{/if}}
+            {{#if extensions.taste}}<p>烟弹口味：{{extensions.taste}}</p>{{/if}}
+            {{#if extensions.ration}}<p>尼古丁含量：{{extensions.ration}}</p>{{/if}}
+            {{#if extensions.common_price}}<p class="show_price">
+              {{#if extensions.common_price}}<span>统一零售价：<strong>￥{{extensions.common_price}}</strong></span><br>{{/if}}
+              <span>询底价：<input type="button" data-clipboard-action="copy" data-clipboard-target="#weixinCode" class="get_price_btn" value="点击复制微信号咨询"/></span>
+            </p>
+            {{else}}
+              <p class="article-bottom"><span>{{dateformat date format="YYYY年MM月DD日 HH:mm"}}</span><span class="pull-right">热度：{{reading.total}}</span></p>
+            {{/if}}
           </div>
         </div>
         <hr>
@@ -42,7 +53,7 @@
         </ul>
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">热度本月排行</div>
+        <div class="panel-heading">热度月排行</div>
         <ul class="list-group">
           {{#foreach readingList.month limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>

@@ -20,19 +20,20 @@
         {{/foreach}} --}}
         {{#foreach lists}}
           {{#if contents}}
-          <ol class="breadcrumb item-list">
+          <ol class="col-md-12 breadcrumb item-list">
             <li style="font-weight: 600;">{{name}}</li>
             <li class="pull-right"><a href="{{path}}">更多</a></li>
           </ol>
           {{/if}}
-          {{#foreach contents}}
-            <div class="media" style="margin-bottom: 10px; padding-bottom: 10px; {{#if isArticle}}border-bottom: 1px solid #efefef;{{/if}}{{#if isProduct}}margin-left: -5px{{/if}}">
+          <div class="col-md-12" style="margin: 0 -15px 20px; width: auto;">
+            {{#foreach contents limit="10"}}
               {{#if isArticle}}
+              <div class="media" style="margin-bottom: 10px; padding-bottom: 10px; {{#if isArticle}}border-bottom: 1px solid #efefef;{{/if}}{{#if isProduct}}margin-left: -5px{{/if}}">
                 <h3 class="media-heading text-overflow margin-bottom-10"><a href="{{href}}" title="{{title}}" target="_blank">{{title}}</a></h3>
                 {{#if thumbnail}}
-                  <div class="media-left">
+                  <a class="media-left" href="{{href}}" title="{{title}}" target="_blank">
                     <img class="media-object" style="width: 100px;" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}">
-                  </div>
+                  </a>
                 {{/if}}
                 <div class="media-body text-muted">
                   {{#if abstract}}
@@ -40,14 +41,16 @@
                   {{/if}}
                   <p{{#if abstract}} class="article-bottom"{{/if}}><span>{{dateformat date format="YYYY年MM月DD日 HH:mm"}}</span><span class="pull-right">热度：{{reading.total}}</span></p>
                 </div>
+              </div>
               {{/if}}
               {{#if isProduct}}
-                <div class="col-md-6" style="border-radius: 3px;padding: 10px;margin: 5px;box-shadow: 0 1px 3px rgba(0,0,0,.5);">
+              <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="media" style="padding: 10px;border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,.5); {{#if isArticle}}border-bottom: 1px solid #efefef;{{/if}}{{#if isProduct}}margin-left: -5px{{/if}}">
                   {{#if thumbnail}}
-                    <div class="media-left">
+                    <a class="media-left" href="{{href}}" title="{{title}}" target="_blank">
                       <img class="media-object" style="box-shadow: none;width: 160px;" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}">
                       <em>人气：{{reading.total}}</em>
-                    </div>
+                    </a>
                   {{/if}}
                   <div class="media-body text-muted">
                     <h4 class="media-heading text-overflow margin-bottom-10" style="white-space: normal;">
@@ -70,9 +73,10 @@
                     </p>
                   </div>
                 </div>
+              </div>
               {{/if}}
-            </div>
-          {{/foreach}}
+            {{/foreach}}
+          </div>
         {{/foreach}}
     </div>
     {{!-- <div class="col-md-3 hidden-xs hidden-sm"> --}}
