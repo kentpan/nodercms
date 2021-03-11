@@ -82,6 +82,14 @@ module.exports = function (req, res) {
       listsService.reading({ sort: '-reading.month' }, callback);
     }
   }, function (err, results) {
+    results.list.contents = results.list.contents.map(function (item) {
+       var newItem = {
+         ...item,
+         isArticle: item.category.path === '/news',
+         isProduct: item.category.path === '/product'
+        };
+       return newItem;
+    });
     res.render('search', {
       layout: 'layout-default',
       siteInfo: results.siteInfo,

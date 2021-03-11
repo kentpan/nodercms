@@ -60,7 +60,14 @@ exports.all = function (callback) {
                 if (content.thumbnail) var thumbnailSrc = content.thumbnail.src;
 
                 content = content.toObject();
-                if (_.get(content, 'category.path')) content.href =  content.category.path + '/' + content.alias;
+                if (_.get(content, 'category.path')) content.url =  content.category.path + '/' + content.alias;
+                if (_.get(content, 'category.path') === '/product') {
+                  content.isProduct = true;
+                }
+                if (_.get(content, 'category.path') === '/news') {
+                  content.isArticle = true;
+                }
+
 
                 if (content.thumbnail) content.thumbnail.src = thumbnailSrc;
 
@@ -86,8 +93,13 @@ exports.all = function (callback) {
                 if (content.thumbnail) var thumbnailSrc = content.thumbnail.src;
 
                 content = content.toObject();
-                if (_.get(content, 'category.path')) content.href = content.category.path + '/' + content.alias;
-
+                if (_.get(content, 'category.path')) content.url = content.category.path + '/' + content.alias;
+                if (_.get(content, 'category.path') === '/product') {
+                  content.isProduct = true;
+                }
+                if (_.get(content, 'category.path') === '/news') {
+                  content.isArticle = true;
+                }
                 if (content.thumbnail) content.thumbnail.src = thumbnailSrc;
 
                 delete content.alias;

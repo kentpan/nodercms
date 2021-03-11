@@ -3,8 +3,7 @@
     <div class="col-md-3">
       <a class="brand" href="/" title="{{siteInfo.title}}"><img height="24" alt="{{siteInfo.title}}" src="/themes/{{siteInfo.theme}}/assets/img/yooz-logo.png"></a>
     </div>
-    <div class="col-md-9">
-      <div class="collapse navbar-collapse">
+    <div class="col-md-6">
       <ul class="nav navbar-nav navbar-left">
         {{#foreach navigation}}
           {{#if isShow}}
@@ -17,6 +16,8 @@
           {{/if}}
         {{/foreach}}
       </ul>
+    </div>
+    <div class="col-md-3">
       <form class="navbar-form navbar-right" style="margin-top: 15px;" action="/search" name="searchForm" autocomplete="on" role="search">
         <div class="form-group">
           <div class="input-group">
@@ -28,10 +29,9 @@
         </div>
       </form>
     </div>
-    </div>
   </div>
 </div>
-<nav class="navbar navbar-blue hidden-md hidden-sm hidden-lg" role="navigation">
+<nav class="navbar navbar-blue yooz-header hidden-md hidden-sm hidden-lg" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -69,3 +69,48 @@
     </div>
   </div>
 </nav>
+
+{{!-- <nav class="navbar navbar-inverse"> --}}
+{{!-- <nav class="navbar navbar-blue yooz-header" style="border-radius: 0;margin-bottom: 10px;">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">切换</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="{{siteInfo.title}}">
+        <img height="24" alt="{{siteInfo.title}}" src="/themes/{{siteInfo.theme}}/assets/img/yooz-logo.png">
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        {{#foreach navigation}}
+          {{#if isShow}}
+            <li class="{{#if current}}active{{#if nodes}} dropdown{{/if}}{{/if}}">
+              <a href="{{#if nodes}}#{{else}}{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}{{/if}}" title="{{name}}"{{#if nodes}} class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"{{/if}}>{{name}}{{#if nodes}} <span class="caret"></span>{{/if}}</a>
+              {{#if nodes}}
+              <ul class="dropdown-menu">{{#foreach nodes}}{{#if isShow}}<li class="{{#if current}}active{{/if}}"><a href="{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}" title="{{name}}">{{name}}</a></li>{{/if}}{{/foreach}}</ul>
+              {{/if}}
+            </li>
+          {{/if}}
+        {{/foreach}}
+      </ul>
+      <form class="navbar-form navbar-right" action="/search" name="searchForm" autocomplete="on" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <input name="words" type="search" method="get" class="form-control" placeholder="搜索全站...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">搜索</button>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container -->
+</nav> --}}

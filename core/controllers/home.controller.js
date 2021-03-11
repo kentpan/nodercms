@@ -43,22 +43,7 @@ module.exports = function (req, res) {
       siteInfo: results.siteInfo,
       navigation: results.navigation,
       features: results.features,
-      lists: results.lists.map(function (item) {
-          var contents = item.contents || [];
-          console.log(contents);
-          var newItem = {
-            ...item,
-            contents: contents.map(function (cont) {
-               var newContent = {
-                 ...cont,
-                 isArticle: cont.category.path === '/news',
-                 isProduct: cont.category.path === '/product'
-               };
-               return newContent;
-            })
-          };
-          return newItem;
-      }),
+      lists: results.lists,
       readingList: {
         total: results.readingTotal,
         // day: results.readingDay,

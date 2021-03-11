@@ -17,10 +17,10 @@ $(document).ready(function(){
      var getPriceBtn = new Clipboard('.get_price_btn');
       getPriceBtn.on('success', function(e) {
            console.log('复制成功', targetText);
-           e.trigger.value = '请打开微信添加好友';
+           e.trigger.value = '请微信添加好友';
            e.clearSelection();
             setTimeout(function() {
-              e.trigger.value = '点击复制微信号咨询';
+              e.trigger.value = '点击复制微信号';
             }, 3000);
       });
  });
