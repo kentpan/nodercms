@@ -36,6 +36,7 @@ exports.get = function (callback) {
  * @param {Function} callback
  */
 exports.save = function (options, callback) {
+  console.log(options.data);
   optionsModel.findOneAndUpdate({ name: 'siteInfo' }, {
     value: options.data
   }, { runValidators: true }, function (err) {

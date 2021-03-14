@@ -18,6 +18,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
     $scope.codeFooter = '';
     $scope.codeWeixin = '';
     $scope.weixinQR = '';
+    $scope.qqCode = '';
     $scope.weixin = '';
     $scope.phoneCode = '';
     $scope.editAuth = false;
@@ -42,6 +43,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
      */
     $http.get('/api/site-info')
       .success(function (result) {
+        console.log(result);
         $scope.themes = result.themes;
         $scope.theme = result.siteInfo.theme || 'default';
         $scope.title = result.siteInfo.title;
@@ -51,6 +53,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
         $scope.codeFooter = result.siteInfo.codeFooter;
         $scope.codeWeixin = result.siteInfo.codeWeixin;
         $scope.weixinQR = result.siteInfo.weixinQR;
+        $scope.qqCode = result.siteInfo.qqCode;
         $scope.weixin = result.siteInfo.weixin;
         $scope.phoneCode = result.siteInfo.phoneCode;
 
@@ -78,6 +81,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
         codeFooter: $scope.codeFooter,
         codeWeixin: $scope.codeWeixin,
         weixinQR: $scope.weixinQR,
+        qqCode: $scope.qqCode,
         weixin: $scope.weixin,
         phoneCode: $scope.phoneCode
       })

@@ -30,11 +30,13 @@ angular.module('nodercms', [
     // 将所有未匹配路由转至根目录
     $urlRouterProvider.otherwise(function ($injector) { $injector.get('$state').go('main') });
 
+    var adminDir = 'yooozadmin';
+
     // 路由
     $stateProvider
       // 安装
       .state('install', {
-        url: '^/admin/install',
+        url: '^/yooozadmin/install',
         controller: 'install',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('install.view.html');
@@ -46,7 +48,7 @@ angular.module('nodercms', [
 
       // 登录
       .state('signIn', {
-        url: '^/admin/sign-in',
+        url: '^/yooozadmin/sign-in',
         controller: 'signIn',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('sign-in.view.html');
@@ -70,7 +72,7 @@ angular.module('nodercms', [
 
       // 推荐管理
       .state('main.features', {
-        url: '^/admin/features',
+        url: '^/yooozadmin/features',
         controller: 'features',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('features.view.html');
@@ -82,7 +84,7 @@ angular.module('nodercms', [
 
       // 新增推荐
       .state('main.features.create', {
-        url: '^/admin/features/:model/create',
+        url: '^/yooozadmin/features/:model/create',
         controller: 'featuresChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('features-change.view.html');
@@ -94,7 +96,7 @@ angular.module('nodercms', [
 
       // 更新推荐
       .state('main.features.update', {
-        url: '^/admin/features/:model/feature/:feature',
+        url: '^/yooozadmin/features/:model/feature/:feature',
         controller: 'featuresChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('features-change.view.html');
@@ -106,7 +108,7 @@ angular.module('nodercms', [
 
       // 没有内容
       .state('main.notFoundContents', {
-        url: '^/admin/contents',
+        url: '^/yooozadmin/contents',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('not-fount-contents.view.html');
         }],
@@ -117,7 +119,7 @@ angular.module('nodercms', [
 
       // 内容列表
       .state('main.contents', {
-        url: '^/admin/contents/category/:category',
+        url: '^/yooozadmin/contents/category/:category',
         controller: 'contents',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('contents.view.html');
@@ -129,7 +131,7 @@ angular.module('nodercms', [
 
       // 栏目列表 - 新建内容
       .state('main.contents.create', {
-        url: '^/admin/contents/category/:category/create',
+        url: '^/yooozadmin/contents/category/:category/create',
         controller: 'contentChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('content-change.view.html');
@@ -141,7 +143,7 @@ angular.module('nodercms', [
 
       // 栏目列表 - 更新内容
       .state('main.contents.update', {
-        url: '^/admin/contents/category/:category/content/:content',
+        url: '^/yooozadmin/contents/category/:category/content/:content',
         controller: 'contentChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('content-change.view.html');
@@ -153,7 +155,7 @@ angular.module('nodercms', [
 
       // 回收站
       .state('main.trash', {
-        url: '^/admin/contents/trash',
+        url: '^/yooozadmin/contents/trash',
         controller: 'trash',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('trash.view.html');
@@ -165,7 +167,7 @@ angular.module('nodercms', [
 
       // 没有单页时
       .state('main.notFoundPages', {
-        url: '^/admin/pages',
+        url: '^/yooozadmin/pages',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('not-found-pages.view.html');
         }],
@@ -176,7 +178,7 @@ angular.module('nodercms', [
 
       // 单页
       .state('main.pages', {
-        url: '^/admin/pages/:page',
+        url: '^/yooozadmin/pages/:page',
         controller: 'pageChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('page-change.view.html');
@@ -188,7 +190,7 @@ angular.module('nodercms', [
 
       // 媒体库
       .state('main.media', {
-        url: '^/admin/media',
+        url: '^/yooozadmin/media',
         controller: 'media',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('media.view.html');
@@ -200,7 +202,7 @@ angular.module('nodercms', [
 
       // 帐号设置
       .state('main.account', {
-        url: '^/admin/account',
+        url: '^/yooozadmin/account',
         controller: 'account',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('account.view.html');
@@ -212,7 +214,7 @@ angular.module('nodercms', [
 
       // 网站配置
       .state('main.siteInfo', {
-        url: '^/admin/setting/site-info',
+        url: '^/yooozadmin/setting/site-info',
         controller: 'siteInfo',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('site-info.view.html');
@@ -224,7 +226,7 @@ angular.module('nodercms', [
 
       // 分类管理
       .state('main.categories', {
-        url: '^/admin/setting/categories',
+        url: '^/yooozadmin/setting/categories',
         controller: 'categories',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('categories.view.html');
@@ -236,7 +238,7 @@ angular.module('nodercms', [
 
       // 分类管理 - 创建分类
       .state('main.categories.create', {
-        url: '^/admin/setting/categories/create',
+        url: '^/yooozadmin/setting/categories/create',
         controller: 'categoriesChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('categories-change.view.html');
@@ -248,7 +250,7 @@ angular.module('nodercms', [
 
       // 分类管理 - 更新分类
       .state('main.categories.update', {
-        url: '^/admin/setting/categories/:_id',
+        url: '^/yooozadmin/setting/categories/:_id',
         controller: 'categoriesChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('categories-change.view.html');
@@ -260,7 +262,7 @@ angular.module('nodercms', [
 
       // 内容模型
       .state('main.contentModels', {
-        url: '^/admin/setting/content-models',
+        url: '^/yooozadmin/setting/content-models',
         controller: 'contentModels',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('content-models.view.html');
@@ -272,7 +274,7 @@ angular.module('nodercms', [
 
       // 内容模型 - 创建模型
       .state('main.contentModels.create', {
-        url: '^/admin/setting/content-models/create',
+        url: '^/yooozadmin/setting/content-models/create',
         controller: 'contentModelChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('content-model-change.view.html');
@@ -284,7 +286,7 @@ angular.module('nodercms', [
 
       // 内容模型 - 更新模型
       .state('main.contentModels.update', {
-        url: '^/admin/setting/content-models/:_id',
+        url: '^/yooozadmin/setting/content-models/:_id',
         controller: 'contentModelChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('content-model-change.view.html');
@@ -296,7 +298,7 @@ angular.module('nodercms', [
 
       // 推荐位配置
       .state('main.featureModels', {
-        url: '^/admin/setting/feature-models',
+        url: '^/yooozadmin/setting/feature-models',
         controller: 'featureModels',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('feature-models.view.html');
@@ -308,7 +310,7 @@ angular.module('nodercms', [
 
       // 推荐位配置 - 新增推荐位
       .state('main.featureModels.create', {
-        url: '^/admin/setting/feature-models/create',
+        url: '^/yooozadmin/setting/feature-models/create',
         controller: 'featureModelChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('feature-model-change.view.html');
@@ -320,7 +322,7 @@ angular.module('nodercms', [
 
       // 推荐位配置 - 更新推荐位
       .state('main.featureModels.update', {
-        url: '^/admin/setting/feature-models/:_id',
+        url: '^/yooozadmin/setting/feature-models/:_id',
         controller: 'featureModelChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('feature-model-change.view.html');
@@ -332,7 +334,7 @@ angular.module('nodercms', [
 
       // // 单页配置
       // .state('main.pages.one', {
-      //   url: '^/admin/setting/feature-models',
+      //   url: '^/yooozadmin/setting/feature-models',
       //   controller: 'featureModels',
       //   templateProvider: ['$templateCache', function($templateCache) {
       //     return $templateCache.get('feature-models.view.html');
@@ -344,7 +346,7 @@ angular.module('nodercms', [
 
       // 角色权限
       .state('main.roles', {
-        url: '^/admin/setting/roles',
+        url: '^/yooozadmin/setting/roles',
         controller: 'roles',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('roles.view.html');
@@ -356,7 +358,7 @@ angular.module('nodercms', [
 
       // 角色权限 - 添加角色
       .state('main.roles.create', {
-        url: '^/admin/setting/roles/create',
+        url: '^/yooozadmin/setting/roles/create',
         controller: 'rolesChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('roles-change.view.html');
@@ -368,7 +370,7 @@ angular.module('nodercms', [
 
       // 角色权限 - 更新角色
       .state('main.roles.update', {
-        url: '^/admin/setting/roles/:_id',
+        url: '^/yooozadmin/setting/roles/:_id',
         controller: 'rolesChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('roles-change.view.html');
@@ -380,7 +382,7 @@ angular.module('nodercms', [
 
       // 后台用户
       .state('main.adminUsers', {
-        url: '^/admin/setting/admin-users',
+        url: '^/yooozadmin/setting/admin-users',
         controller: 'adminUsers',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('admin-users.view.html');
@@ -392,7 +394,7 @@ angular.module('nodercms', [
 
       // 后台用户 - 创建用户
       .state('main.adminUsers.create', {
-        url: '^/admin/setting/admin-users/create',
+        url: '^/yooozadmin/setting/admin-users/create',
         controller: 'adminUsersChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('admin-users-change.view.html');
@@ -404,7 +406,7 @@ angular.module('nodercms', [
 
       // 后台用户 - 更新用户
       .state('main.adminUsers.update', {
-        url: '^/admin/setting/admin-users/:_id',
+        url: '^/yooozadmin/setting/admin-users/:_id',
         controller: 'adminUsersChange',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('admin-users-change.view.html');
@@ -3333,6 +3335,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
     $scope.codeFooter = '';
     $scope.codeWeixin = '';
     $scope.weixinQR = '';
+    $scope.qqCode = '';
     $scope.weixin = '';
     $scope.phoneCode = '';
     $scope.editAuth = false;
@@ -3357,6 +3360,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
      */
     $http.get('/api/site-info')
       .success(function (result) {
+        console.log(result);
         $scope.themes = result.themes;
         $scope.theme = result.siteInfo.theme || 'default';
         $scope.title = result.siteInfo.title;
@@ -3366,6 +3370,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
         $scope.codeFooter = result.siteInfo.codeFooter;
         $scope.codeWeixin = result.siteInfo.codeWeixin;
         $scope.weixinQR = result.siteInfo.weixinQR;
+        $scope.qqCode = result.siteInfo.qqCode;
         $scope.weixin = result.siteInfo.weixin;
         $scope.phoneCode = result.siteInfo.phoneCode;
 
@@ -3393,6 +3398,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
         codeFooter: $scope.codeFooter,
         codeWeixin: $scope.codeWeixin,
         weixinQR: $scope.weixinQR,
+        qqCode: $scope.qqCode,
         weixin: $scope.weixin,
         phoneCode: $scope.phoneCode
       })
@@ -4643,6 +4649,7 @@ angular.module('directives').directive('ndMediaSelect',  ['$templateCache', '$ti
                 case 'jpeg':
                 case 'png':
                 case 'gif':
+                case 'webp':
                   _medium.isImage = true;
               }
 
@@ -4678,6 +4685,7 @@ angular.module('directives').directive('ndMediaSelect',  ['$templateCache', '$ti
                 case 'jpeg':
                 case 'png':
                 case 'gif':
+                case 'webp':
                   medium.isImage = true;
               }
 
@@ -4685,7 +4693,25 @@ angular.module('directives').directive('ndMediaSelect',  ['$templateCache', '$ti
             });
           });
 
+          function getRandomName(len, ext) {
+            var chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F",
+      "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y",
+      "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+      "s", "t", "u", "v", "w", "x", "y", "z"];
+            var name = "";
+            for(var i = 0; i < (len || 16); i++) {//这里是几位就要在这里不改变
+              var id = parseInt(Math.random() * 61);
+              name += chars[id];
+            }
+            return name + (ext || '');
+          }
+
           async.eachLimit(files, 3, function (file, callback) {
+            // 重命名, 随机
+            var ext = file.name.substring(file.name.lastIndexOf('.'));
+            // var newFileName = '' + +new Date + file.size + ext;
+            var newFileName = getRandomName(16, ext);
+            Upload.rename(file, newFileName);
             Upload.upload({
               url: '/api/media',
               data: { file: file }

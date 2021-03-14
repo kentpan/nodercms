@@ -67,6 +67,7 @@ exports.update = function (req, res) {
     codeFooter: req.body.codeFooter,
     codeWeixin: req.body.codeWeixin,
     weixinQR: req.body.weixinQR,
+    qqCode: req.body.qqCode,
     weixin: req.body.weixin,
     phoneCode: req.body.phoneCode
   };

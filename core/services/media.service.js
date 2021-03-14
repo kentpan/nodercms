@@ -154,7 +154,8 @@ exports.save = function (options, callback) {
       },
       function (oldMedium, callback) {
         if (data.fileName !== oldMedium.fileName) {
-          var prePath = '../../public/media/' + moment(oldMedium.date).format('YYYYMM') + '/' + oldMedium._id + '/';
+          var momentDate = moment(oldMedium.date);
+          var prePath = '../../public/media/' + momentDate.format('YYYYMM') + '/' + oldMedium._id + '/';
           var oldPath = path.join(__dirname, prePath + oldMedium.fileName);
           var newPath = path.join(__dirname, prePath + data.fileName);
 
@@ -205,7 +206,9 @@ exports.save = function (options, callback) {
       }],
       // 创建文件夹
       mkdirFolder: ['saveModel', function (callback, results) {
-        var folder = '../../public/media/' + moment(results.saveModel.date).format('YYYYMM') + '/' + results.saveModel._id;
+
+        var momentDate = moment(results.saveModel.date);
+        var folder = '../../public/media/' + momentDate.format('YYYYMM') + '/' + results.saveModel._id;
 
         mkdirp(path.join(__dirname, folder), function (err) {
           if (err) err.type = 'system';
@@ -308,7 +311,8 @@ exports.remove = function (options, callback) {
           });
         },
         unlinkFile: ['removeMedium', function (callback, results) {
-          var fileFolder = '../../public/media/' + moment(results.removeMedium.date).format('YYYYMM') + '/' + results.removeMedium._id;
+          var momentDate = moment(results.removeMedium.date);
+          var fileFolder = '../../public/media/' + momentDate.format('YYYYMM') + '/' + results.removeMedium._id;
 
           rimraf(path.join(__dirname, fileFolder), function (err) {
             if (err) err.type = 'system';

@@ -1,27 +1,49 @@
 <script>
 $(document).ready(function(){
      var targetText=$("#weixinCode").text();
-     var clipboard = new Clipboard('#copy_btn');
+     var clipboard = new Clipboard('#copy_btn_wx');
      clipboard.on('success', function(e) {
            // console.info('Action:', e.action);
            // console.info('Text:', e.text);
            // console.info('Trigger:', e.trigger);
            // alert("复制成功");
-           console.log('复制成功', targetText);
+           console.log('wx复制成功', targetText);
            e.trigger.value = '请打开微信加好友';
            e.clearSelection();
             setTimeout(function() {
               e.trigger.value = '点击复制微信号';
             }, 3000);
      });
-     var getPriceBtn = new Clipboard('.get_price_btn');
-      getPriceBtn.on('success', function(e) {
-           console.log('复制成功', targetText);
-           e.trigger.value = '请微信添加好友';
+     var clipboard = new Clipboard('#copy_btn_qq');
+     clipboard.on('success', function(e) {
+           // console.info('Action:', e.action);
+           // console.info('Text:', e.text);
+           // console.info('Trigger:', e.trigger);
+           // alert("复制成功");
+           console.log('QQ复制成功', targetText);
+           e.trigger.value = '请打开QQ加好友';
            e.clearSelection();
             setTimeout(function() {
-              e.trigger.value = '点击复制微信号';
+              e.trigger.value = '点击复制QQ号';
             }, 3000);
-      });
+     });
+     var getPriceBtnWX = new Clipboard('.get_price_btn_wx');
+     getPriceBtnWX.on('success', function(e) {
+         console.log('微信复制成功', targetText);
+         e.trigger.value = '微信号复制成功';
+           e.clearSelection();
+          setTimeout(function() {
+            e.trigger.value = '复制微信';
+          }, 3000);
+     });
+     var getPriceBtnQQ = new Clipboard('.get_price_btn_qq');
+     getPriceBtnQQ.on('success', function(e) {
+         console.log('QQ号复制成功', targetText);
+         e.trigger.value = 'QQ号复制成功';
+           e.clearSelection();
+          setTimeout(function() {
+            e.trigger.value = '复制QQ';
+          }, 3000);
+     });
  });
 </script>

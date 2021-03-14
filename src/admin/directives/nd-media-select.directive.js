@@ -176,6 +176,7 @@ angular.module('directives').directive('ndMediaSelect',  ['$templateCache', '$ti
                 case 'jpeg':
                 case 'png':
                 case 'gif':
+                case 'webp':
                   _medium.isImage = true;
               }
 
@@ -211,6 +212,7 @@ angular.module('directives').directive('ndMediaSelect',  ['$templateCache', '$ti
                 case 'jpeg':
                 case 'png':
                 case 'gif':
+                case 'webp':
                   medium.isImage = true;
               }
 
@@ -218,7 +220,25 @@ angular.module('directives').directive('ndMediaSelect',  ['$templateCache', '$ti
             });
           });
 
+          function getRandomName(len, ext) {
+            var chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F",
+      "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y",
+      "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+      "s", "t", "u", "v", "w", "x", "y", "z"];
+            var name = "";
+            for(var i = 0; i < (len || 16); i++) {//这里是几位就要在这里不改变
+              var id = parseInt(Math.random() * 61);
+              name += chars[id];
+            }
+            return name + (ext || '');
+          }
+
           async.eachLimit(files, 3, function (file, callback) {
+            // 重命名, 随机
+            var ext = file.name.substring(file.name.lastIndexOf('.'));
+            // var newFileName = '' + +new Date + file.size + ext;
+            var newFileName = getRandomName(16, ext);
+            Upload.rename(file, newFileName);
             Upload.upload({
               url: '/api/media',
               data: { file: file }
