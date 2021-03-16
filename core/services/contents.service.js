@@ -7,6 +7,10 @@ var categories = require('../models/categories.model');
 var contentsModel = require('../models/contents.model');
 var mediaModel = require('../models/media.model');
 
+var fs = require('fs');
+var os = require('os');
+var path = require('path');
+
 /**
  * 单条内容
  * @param {Object} options
@@ -277,6 +281,15 @@ exports.checkAlias = function (options, callback) {
   });
 };
 
+exports.appendFile = function (filepath, contents, callback) {
+  return fs.appendFile(filepath, contents, function(err) {
+    if(err){
+      return console.log(err), callback(false);
+    }
+    callback(true);
+  })
+}
+
 /**
  * 存储内容
  * @param {Object} options
@@ -298,6 +311,19 @@ exports.save = function (options, callback) {
   var data = options.data;
   var _id = options._id;
   var ids = options.ids;
+  var sitemapFilepath = path.resolve(__dirname, '../../public/sitemap.txt');;
+  var hostList = [
+    'http://www.yoozworld.co',
+    'http://www.yooz.org.cn',
+    'http://www.yooz.ren',
+    'http://www.yooz.net.cn'
+  ];
+  var categoryMap = {
+    '6041ff7b3106e6162d111d36': '/product', // 本地
+    '6042f491074d3591b8116e92': '/product',
+    '6041ff343106e6162d111d35': '/news', // 本地
+    '6042f44f074d3591b8116e91': '/news'
+  };
 
   if (ids) {
     contentsModel.update({ $in: { _id: ids } }, data, { multi: true, runValidators: true }, function (err) {
@@ -424,6 +450,19 @@ exports.save = function (options, callback) {
           runValidators: true
         }, function (err) {
           callback(err);
+        });
+      }],
+      updateSiteMap: ['saveContent', function (callback, results) {
+        var urlPath = categoryMap[data.category] || '';
+        var contents = [];
+        hostList.map(function(host) {
+          contents.push(host + urlPath + '/' + data.alias);
+          return host;
+        });
+        // TODO: 需要先读取文件是否为空判断开头要不要os.EOL换行，避免空文件第一次写入时第一行为空
+        exports.appendFile(sitemapFilepath, os.EOL + contents.join(os.EOL), function(status) {
+          console.log(status, data, contents);
+          callback();
         });
       }]
     }, function (err) {
