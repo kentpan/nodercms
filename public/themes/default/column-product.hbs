@@ -25,7 +25,7 @@
           </div>
         </div> --}}
         <div class="col-md-12 yooz-product" style="margin-bottom: 15px;border-radius: 3px;padding: 10px 10px 0;box-shadow: 0 1px 3px rgba(0,0,0,.5);">
-          {{> thumb isLink="true" styles="box-shadow: none;" containerStyle="" totalStyle=""}}
+          {{> thumb isLink="true" styles="box-shadow: none;width: 160px;" containerStyle="" totalStyle=""}}
           {{!-- {{#if thumbnail}}
             <a href="{{url}}" title="{{title}}" target="_blank" class="media-left">
               <img class="media-object" style="box-shadow: none;" src="{{thumbnail.src}}" title="{{title}}" alt="{{title}}">
@@ -62,7 +62,7 @@
     {{!-- <div class="col-md-3 hidden-xs hidden-sm"> --}}
     <div class="col-md-3">
       <div class="panel panel-default">
-        <div class="panel-heading">人气总榜单</div>
+        <h4 class="panel-heading" style="margin: 0;">人气总榜单</h4>
         <ul class="list-group">
           {{#foreach readingList.total limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow" style="text-align: center;">
@@ -75,7 +75,7 @@
         </ul>
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">人气月榜单</div>
+        <h4 class="panel-heading" style="margin: 0;">人气月榜单</h4>
         <ul class="list-group">
           {{#foreach readingList.month limit="5"}}
             <a href="{{href}}" class="list-group-item text-overflow" style="text-align: center;">

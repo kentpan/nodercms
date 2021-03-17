@@ -1,15 +1,17 @@
 body {
   margin: 0;
   font-family: Helvetica, Arial, "Hiragino Sans GB", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 20px;
 }
 
 a {
+  color: #000;
   text-decoration: none;
 }
 
 a:hover, a:focus {
+  color: #000;
   text-decoration: underline;
 }
 
@@ -62,7 +64,7 @@ h3, .h3 {
 }
 
 h4, .h4 {
-  font-size: 18px
+  font-size: 16px
 }
 
 h5, .h5 {
@@ -305,6 +307,10 @@ h6, .h6 {
   background-color: #efefef;
   border-radius: 3px; */
 }
+.media-body .show_price {
+  display: block;
+  margin: 0;
+}
 .media-body .show_price span {
   display: inline-block;
   margin: 0 0 10px;
@@ -322,8 +328,7 @@ h6, .h6 {
 .media-body .text-red .get_price_btn_wx,
 .media-body .text-red .get_price_btn_qq {
   background-color: #f00;
-  padding: 5px 8px;
-  font-size: 14px;
+  padding: 5px;
   font-weight: 300;
   border: none;
   color: #fff;
@@ -380,7 +385,6 @@ h6, .h6 {
 .weixin-code .copy_btn {
   background-color: #f00;
   padding: 5px;
-  font-size: 18px;
   font-weight: 300;
   border: none;
   color: #fff;
@@ -421,7 +425,7 @@ h6, .h6 {
 }
 @media (min-width: 992px) {
   .weixin-code {
-    font-size: 24px;
+    font-size: 18px;
   }
   .yooz-header .row {
     width: 970px;
@@ -430,7 +434,7 @@ h6, .h6 {
 }
 @media (min-width: 1200px) {
   .weixin-code {
-    font-size: 20px;
+    font-size: 18px;
   }
   .yooz-header .row {
       width: 1170px;
@@ -497,7 +501,6 @@ h6, .h6 {
   width: 65%;
   margin-top: 5px;
   font-size: 16px;
-  font-weight: 700;
 }
 .weimg-one .weixin-h-w {
   color: #999;
@@ -548,6 +551,9 @@ h6, .h6 {
 .yooz-footer table td p {
   font-size: 12px;
   color: #ececec;
+}
+.yooz-footer .polic {
+  color: #777;
 }
 
 .pagination>.active>a,
