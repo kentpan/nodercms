@@ -60,7 +60,7 @@ angular.module('nodercms', [
 
       // 控制面板
       .state('main', {
-        url: '^/admin',
+        url: '^/yooozadmin',
         controller: 'main',
         templateProvider: ['$templateCache', function($templateCache) {
           return $templateCache.get('main.view.html');

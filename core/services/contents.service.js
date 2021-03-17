@@ -311,12 +311,30 @@ exports.save = function (options, callback) {
   var data = options.data;
   var _id = options._id;
   var ids = options.ids;
-  var sitemapFilepath = path.resolve(__dirname, '../../public/sitemap.txt');;
+  // var sitemapFilepath = path.resolve(__dirname, '../../public/sitemap.txt');
+  // var hostList = [
+  //   'http://www.yoozworld.co',
+  //   'http://www.yooz.org.cn',
+  //   'http://www.yooz.ren',
+  //   'http://www.yooz.net.cn'
+  // ];
   var hostList = [
-    'http://www.yoozworld.co',
-    'http://www.yooz.org.cn',
-    'http://www.yooz.ren',
-    'http://www.yooz.net.cn'
+    {
+      host: 'http://www.yoozworld.co',
+      path: path.resolve(__dirname, '../../public/site.yoozworld.co.txt')
+    },
+    {
+      host: 'http://www.yooz.org.cn',
+      path: path.resolve(__dirname, '../../public/site.yooz.org.cn.txt')
+    },
+    {
+      host: 'http://www.yooz.ren',
+      path: path.resolve(__dirname, '../../public/site.yooz.ren.txt')
+    },
+    {
+      host: 'http://www.yooz.net.cn',
+      path: path.resolve(__dirname, '../../public/site.yooz.net.cn.txt')
+    }
   ];
   var categoryMap = {
     '6041ff7b3106e6162d111d36': '/product', // 本地
@@ -455,15 +473,15 @@ exports.save = function (options, callback) {
       updateSiteMap: ['saveContent', function (callback, results) {
         var urlPath = categoryMap[data.category] || '';
         var contents = [];
-        hostList.map(function(host) {
-          contents.push(host + urlPath + '/' + data.alias);
-          return host;
+        hostList.map(function(list) {
+          // contents.push(list.host + urlPath + '/' + data.alias);
+          // TODO: 需要先读取文件是否为空判断开头要不要os.EOL换行，避免空文件第一次写入时第一行为空
+          exports.appendFile(list.path, os.EOL + list.host + urlPath + '/' + data.alias + os.EOL, function(status) {
+            console.log(status, data, contents);
+          });
+          return list;
         });
-        // TODO: 需要先读取文件是否为空判断开头要不要os.EOL换行，避免空文件第一次写入时第一行为空
-        exports.appendFile(sitemapFilepath, os.EOL + contents.join(os.EOL), function(status) {
-          console.log(status, data, contents);
-          callback();
-        });
+        callback();
       }]
     }, function (err) {
       if (err) {
