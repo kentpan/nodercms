@@ -44,17 +44,17 @@ angular.module('controllers').controller('main', ['$scope', '$http',
 		/**
 		 * NoderCMS 官方信息
 		 */
-		$http.get('http://console.nodercms.com/openApi/info')
-			.then(function (res) {
-				var data = res.data;
+		// $http.get('http://console.nodercms.com/openApi/info')
+		// 	.then(function (res) {
+		// 		var data = res.data;
 
-				$scope.officialSystemInfo = data;
-			}, function () {
-				$scope.$emit('notification', {
-					type: 'danger',
-					message: '官方信息读取失败'
-				});
-			});
+		// 		$scope.officialSystemInfo = data;
+		// 	}, function () {
+		// 		$scope.$emit('notification', {
+		// 			type: 'danger',
+		// 			message: '官方信息读取失败'
+		// 		});
+		// 	});
 
 		/**
 		 * 比较是否最新版本

@@ -231,7 +231,8 @@ export function initShare(options = {}, scope) {
             // 分享url跟当前location.href必须一致, 不能附加fromchannel参数
             linkUrl = getOriginUrl(linkUrl, hostName);
             options.linkUrl = linkUrl;
-            loadScript('//res.wx.qq.com/open/js/jweixin-1.2.0.js').then(() => {
+            // //res.wx.qq.com/open/js/jweixin-1.2.0.js
+            loadScript('//res.wx.qq.com/open/js/jweixin-1.6.0.js').then(() => {
                 const API = require('../../store/api').default;
                 const shareOption = {
                     url: options.linkUrl

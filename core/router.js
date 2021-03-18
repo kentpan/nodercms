@@ -203,6 +203,9 @@ module.exports = {
   // 内容页
   '/:content*': { get: 'content' },
 
+  // 获取微信token
+  '/get_weixintoken': {get: 'weixin'},
+
   // 错误页
   '/*': { get: 'errors.notFound' }
 };
