@@ -13,7 +13,7 @@ var siteInfoService = require('../services/site-info.service');
 module.exports = function (req, res) {
   async.waterfall([
     function (callback) {
-      siteInfoService.get(function (err, siteInfo) {
+      return siteInfoService.get(req, function (err, siteInfo) {
         if (err) return callback(err);
 
         if (siteInfo) {

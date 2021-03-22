@@ -2750,74 +2750,74 @@ angular.module('controllers').controller('install', ['$scope', '$state', '$http'
  * Main Controller
  */
 angular.module('controllers').controller('main', ['$scope', '$http',
-	function ($scope, $http) {
-		'use strict';
+    function ($scope, $http) {
+        'use strict';
 
-		/**
-		 * 初始化变量
-		 */
-		$scope.website = {
-			hostname: window.location.hostname,
-			origin: window.location.origin
-		};
-		$scope.systemInfo = {};
-		$scope.officialSystemInfo = {};
-		$scope.nodeInfo = {};
-		$scope.databaseInfo = {};
-		$scope.contentsTotal = '';
-		$scope.mediaTotal = '';
-		$scope.adminsTotal = '';
-		$scope.readingList = {};
-		$scope.versionIsLatest = true;
-    $scope.sponsor = 99;
+        /**
+         * 初始化变量
+         */
+        $scope.website = {
+            hostname: window.location.hostname,
+            origin: window.location.origin
+        };
+        $scope.systemInfo = {};
+        $scope.officialSystemInfo = {};
+        $scope.nodeInfo = {};
+        $scope.databaseInfo = {};
+        $scope.contentsTotal = '';
+        $scope.mediaTotal = '';
+        $scope.adminsTotal = '';
+        $scope.readingList = {};
+        $scope.versionIsLatest = true;
+        $scope.sponsor = 99;
 
-		$http.get('/api/dashboard')
-			.then(function (res) {
-				var data = res.data;
+        $http.get('/api/dashboard')
+            .then(function (res) {
+                var data = res.data;
 
-				$scope.systemInfo = data.systemInfo;
-				$scope.nodeInfo = data.nodeInfo;
-				$scope.databaseInfo = data.databaseInfo;
-				$scope.contentsTotal = data.contentsTotal;
-				$scope.mediaTotal = data.mediaTotal;
-				$scope.adminsTotal = data.adminsTotal;
-				$scope.readingList = data.readingList;
-			}, function () {
-				$scope.$emit('notification', {
-					type: 'danger',
-					message: '读取控制面板数据失败'
-				});
-			});
+                $scope.systemInfo = data.systemInfo;
+                $scope.nodeInfo = data.nodeInfo;
+                $scope.databaseInfo = data.databaseInfo;
+                $scope.contentsTotal = data.contentsTotal;
+                $scope.mediaTotal = data.mediaTotal;
+                $scope.adminsTotal = data.adminsTotal;
+                $scope.readingList = data.readingList;
+            }, function () {
+                $scope.$emit('notification', {
+                    type: 'danger',
+                    message: '读取控制面板数据失败'
+                });
+            });
 
-		/**
-		 * NoderCMS 官方信息
-		 */
-		$http.get('http://console.nodercms.com/openApi/info')
-			.then(function (res) {
-				var data = res.data;
+        /**
+         * NoderCMS 官方信息
+         */
+        // $http.get('http://console.nodercms.com/openApi/info')
+        // 	.then(function (res) {
+        // 		var data = res.data;
 
-				$scope.officialSystemInfo = data;
-			}, function () {
-				$scope.$emit('notification', {
-					type: 'danger',
-					message: '官方信息读取失败'
-				});
-			});
+        // 		$scope.officialSystemInfo = data;
+        // 	}, function () {
+        // 		$scope.$emit('notification', {
+        // 			type: 'danger',
+        // 			message: '官方信息读取失败'
+        // 		});
+        // 	});
 
-		/**
-		 * 比较是否最新版本
-		 */
-		$scope.compareVersion = function (version, officialVersion) {
-			return officialVersion && version !== officialVersion ? true : false;
-		};
+        /**
+         * 比较是否最新版本
+         */
+        $scope.compareVersion = function (version, officialVersion) {
+            return officialVersion && version !== officialVersion ? true : false;
+        };
 
-		/**
-		 * 统计
-		 */
-		$http.put('/api/statistics', {
-			hostname: $scope.website.hostname
-		});
-	}
+        /**
+         * 统计
+         */
+        $http.put('/api/statistics', {
+            hostname: $scope.website.hostname
+        });
+    }
 ]);
 /**
  * Media Controller
@@ -3326,6 +3326,8 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
      * 初始化变量
      */
     $scope.transmitting = true;
+    $scope.domains = [];
+    $scope.domain = '';
     $scope.themes = [];
     $scope.theme = '';
     $scope.title = '';
@@ -3358,31 +3360,61 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
     /**
      * 获取网站配置
      */
-    $http.get('/api/site-info')
-      .success(function (result) {
-        console.log(result);
-        $scope.themes = result.themes;
-        $scope.theme = result.siteInfo.theme || 'default';
-        $scope.title = result.siteInfo.title;
-        $scope.keywords = result.siteInfo.keywords;
-        $scope.description = result.siteInfo.description;
-        $scope.codeHeader = result.siteInfo.codeHeader;
-        $scope.codeFooter = result.siteInfo.codeFooter;
-        $scope.codeWeixin = result.siteInfo.codeWeixin;
-        $scope.weixinQR = result.siteInfo.weixinQR;
-        $scope.qqCode = result.siteInfo.qqCode;
-        $scope.weixin = result.siteInfo.weixin;
-        $scope.phoneCode = result.siteInfo.phoneCode;
-
-        $scope.transmitting = false;
+    $scope.getInfoWithDomain = function () {
+      var domain = $scope.domain || location.hostname;
+      domain = domain.indexOf('127.0.0.1') > -1 ? 'www.yoozworld.co' : domain;
+      if (!/^www\./.test(domain)) {
+        domain = 'www.' + domain;
+      }
+      $http.get('/api/site-info', {
+        params: {
+          host: domain
+        }
       })
-      .error(function () {
-        $scope.$emit('notification', {
-          type: 'danger',
-          message: '获取网站配置失败'
-        });
-      });
+        .success(function (result) {
+          console.log($scope.domain, result);
+          $scope.themes = result.themes;
+          $scope.theme = result.siteInfo.theme || 'default';
+          $scope.domains = [
+            {
+              name: 'www.yoozworld.co',
+              value: 'www.yoozworld.co'
+            },
+            {
+              name: 'www.yooz.org.cn',
+              value: 'www.yooz.org.cn'
+            },
+            {
+              name: 'www.yooz.ren',
+              value: 'www.yooz.ren'
+            },
+            {
+              name: 'www.yooz.net.cn',
+              value: 'www.yooz.net.cn'
+            }
+          ];
+          $scope.domain = $scope.domain || result.siteInfo.domain || $scope.website.hostname || 'www.yoozworld.co';
+          $scope.title = result.siteInfo.title;
+          $scope.keywords = result.siteInfo.keywords;
+          $scope.description = result.siteInfo.description;
+          $scope.codeHeader = result.siteInfo.codeHeader;
+          $scope.codeFooter = result.siteInfo.codeFooter;
+          $scope.codeWeixin = result.siteInfo.codeWeixin;
+          $scope.weixinQR = result.siteInfo.weixinQR;
+          $scope.qqCode = result.siteInfo.qqCode;
+          $scope.weixin = result.siteInfo.weixin;
+          $scope.phoneCode = result.siteInfo.phoneCode;
 
+          $scope.transmitting = false;
+        })
+        .error(function () {
+          $scope.$emit('notification', {
+            type: 'danger',
+            message: '获取网站配置失败'
+          });
+        });
+    }
+    $scope.getInfoWithDomain();
     /**
      * 更新网站配置
      */
@@ -3391,6 +3423,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
 
       $http.put('/api/site-info', {
         theme: $scope.theme,
+        domain: $scope.domain,
         title: $scope.title,
         keywords: $scope.keywords,
         description: $scope.description,
@@ -3573,98 +3606,98 @@ angular.module('services').factory('account', ['$rootScope', '$http', '$q', '$ca
   function ($rootScope, $http, $q, $cacheFactory) {
     'use strict';
 
-		/**
-		 * 定义缓存
-		 */
-		var cache = $cacheFactory('account');
+        /**
+         * 定义缓存
+         */
+        var cache = $cacheFactory('account');
 
-		/**
-		 * 主体
-		 */
-		return {
-			get: function () {
-				var deferred = $q.defer();
+        /**
+         * 主体
+         */
+        return {
+            get: function () {
+                var deferred = $q.defer();
 
-				if (cache.get('user')) {
-					deferred.resolve(cache.get('user'));
-				} else {
-					$http.get('/api/account')
-						.then(function (res) {
-							var data = res.data;
+                if (cache.get('user')) {
+                    deferred.resolve(cache.get('user'));
+                } else {
+                    $http.get('/api/account')
+                        .then(function (res) {
+                            var data = res.data;
 
-							cache.put('user', data);
+                            cache.put('user', data);
 
-							deferred.resolve(data);
-						}, function (res) {
-							deferred.reject(res.data);
-						});
-				}
+                            deferred.resolve(data);
+                        }, function (res) {
+                            deferred.reject(res.data);
+                        });
+                }
 
-				return deferred.promise;
-			},
-			auths: function () {
-				var self = this;
+                return deferred.promise;
+            },
+            auths: function () {
+                var self = this;
 
-				return self.get()
-					.then(function (user) {
-						var auths = {
-							features: { read: false, edit: false },
-							contents: { read: false, edit: false },
-							pages: { read: false, edit: false },
-							media: { read: false, edit: false },
-							account: { read: false, edit: false },
-							siteInfo: { read: false, edit: false },
-							categories: { read: false, edit: false },
-							contentModels: { read: false, edit: false },
-							featureModels: { read: false, edit: false },
-							roles: { read: false, edit: false },
-							adminUsers: { read: false, edit: false }
-						};
-						
-						_.forEach(_.get(user, 'role.authorities'), function (authority) {
-							if (authority === 100000) {
-								_.forEach(auths, function (authority, key) {
-									auths[key] = { read: true, edit: true };
-								});
+                return self.get()
+                    .then(function (user) {
+                        var auths = {
+                            features: { read: false, edit: false },
+                            contents: { read: false, edit: false },
+                            pages: { read: false, edit: false },
+                            media: { read: false, edit: false },
+                            account: { read: false, edit: false },
+                            siteInfo: { read: false, edit: false },
+                            categories: { read: false, edit: false },
+                            contentModels: { read: false, edit: false },
+                            featureModels: { read: false, edit: false },
+                            roles: { read: false, edit: false },
+                            adminUsers: { read: false, edit: false }
+                        };
+                        
+                        _.forEach(_.get(user, 'role.authorities'), function (authority) {
+                            if (authority === 100000) {
+                                _.forEach(auths, function (authority, key) {
+                                    auths[key] = { read: true, edit: true };
+                                });
 
-								return false;
-							}
+                                return false;
+                            }
 
-							switch (authority) {
-								case 100100: auths.features.read  = true; break;
-								case 100101: auths.features.edit  = true; break;
-								case 100200: auths.contents.read  = true; break;
-								case 100201: auths.contents.edit  = true; break;
-								case 100300: auths.pages.read  = true; break;
-								case 100301: auths.pages.edit  = true; break;
-								case 100400: auths.media.read  = true; break;
-								case 100401: auths.media.edit  = true; break;
-								case 109000: auths.account.read  = true; break;
-								case 109001: auths.account.edit  = true; break;
-								case 110100: auths.siteInfo.read  = true; break;
-								case 110101: auths.siteInfo.edit  = true; break;
-								case 110200: auths.categories.read  = true; break;
-								case 110201: auths.categories.edit  = true; break;
-								case 110300: auths.contentModels.read  = true; break;
-								case 110301: auths.contentModels.edit  = true; break;
-								case 110400: auths.featureModels.read  = true; break;
-								case 110401: auths.featureModels.edit  = true; break;
-								case 110500: auths.roles.read  = true; break;
-								case 110501: auths.roles.edit  = true; break;
-								case 110600: auths.adminUsers.read  = true; break;
-								case 110601: auths.adminUsers.edit  = true;
-							}
-						});
+                            switch (authority) {
+                                case 100100: auths.features.read  = true; break;
+                                case 100101: auths.features.edit  = true; break;
+                                case 100200: auths.contents.read  = true; break;
+                                case 100201: auths.contents.edit  = true; break;
+                                case 100300: auths.pages.read  = true; break;
+                                case 100301: auths.pages.edit  = true; break;
+                                case 100400: auths.media.read  = true; break;
+                                case 100401: auths.media.edit  = true; break;
+                                case 109000: auths.account.read  = true; break;
+                                case 109001: auths.account.edit  = true; break;
+                                case 110100: auths.siteInfo.read  = true; break;
+                                case 110101: auths.siteInfo.edit  = true; break;
+                                case 110200: auths.categories.read  = true; break;
+                                case 110201: auths.categories.edit  = true; break;
+                                case 110300: auths.contentModels.read  = true; break;
+                                case 110301: auths.contentModels.edit  = true; break;
+                                case 110400: auths.featureModels.read  = true; break;
+                                case 110401: auths.featureModels.edit  = true; break;
+                                case 110500: auths.roles.read  = true; break;
+                                case 110501: auths.roles.edit  = true; break;
+                                case 110600: auths.adminUsers.read  = true; break;
+                                case 110601: auths.adminUsers.edit  = true;
+                            }
+                        });
 
-						return auths;
-					}, function (error) {
-						return error;
-					});
-			},
-			reset: function () {
-				cache.remove('user');
-			}
-		};
+                        return auths;
+                    }, function (error) {
+                        return error;
+                    });
+            },
+            reset: function () {
+                cache.remove('user');
+            }
+        };
   }
 ]);
 /**
@@ -3748,27 +3781,27 @@ angular.module('services').factory('checkAuthResolve', ['$rootScope', '$q', '$st
   function ($rootScope, $q, $state, account) {
     'use strict';
 
-		return function (category, action) {
-			var deferred = $q.defer();
+        return function (category, action) {
+            var deferred = $q.defer();
 
-			account.auths()
-				.then(function (auths) {
-					if (auths[category][action]) {
-						deferred.resolve();
-					} else {
-						account.reset();
-						$state.go('main', null, { reload: 'main' });
-					}
-				}, function () {
-					account.reset();
-					$rootScope.$emit('notification', {
-						type: 'danger',
-						message: '读取权限失败'
-					});
-				});
+            account.auths()
+                .then(function (auths) {
+                    if (auths[category][action]) {
+                        deferred.resolve();
+                    } else {
+                        account.reset();
+                        $state.go('main', null, { reload: 'main' });
+                    }
+                }, function () {
+                    account.reset();
+                    $rootScope.$emit('notification', {
+                        type: 'danger',
+                        message: '读取权限失败'
+                    });
+                });
 
-			return deferred.promise;
-		};
+            return deferred.promise;
+        };
   }
 ]);
 /**

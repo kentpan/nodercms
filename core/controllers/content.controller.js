@@ -24,7 +24,9 @@ module.exports = function (req, res, next) {
     var categoryPath = '/' + req.params.content + _(req.params[0]).split('/').initial().join('/');
 
     async.auto({
-      siteInfo: siteInfoService.get,
+      siteInfo: function (callback) {
+        return siteInfoService.get(req, callback);
+      },
       navigation: function (callback) {
         categoriesService.navigation({ current: categoryPath }, callback);
       },

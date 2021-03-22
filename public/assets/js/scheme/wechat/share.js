@@ -2,9 +2,6 @@
 /**
  * 微信分享初始化
  */
- const {
-     matrixApp
- } = require('../matrix');
 export function initShare(options = {}) {
     let originUrl = location.href.split('#')[0];
     const jsApiListOpt = [
@@ -54,7 +51,7 @@ export function initShare(options = {}) {
                 titleDefault: default_options.title,
                 contentDefault: default_options.content,
                 iconUrlDefault: default_options.icon,
-                inbox: matrixApp() || 'wise'
+                // inbox: matrixApp() || 'wise'
             };
             window.wx && (wx.ready(function () {
                 let shareConfig = {

@@ -99,6 +99,7 @@ exports.install = function (options, callback) {
     writeSiteinfo: ['connectDatabase', function (callback) {
       new optionsModel({
         name: 'siteInfo',
+        domain: siteInfoDate.domain || 'www.yoozworld.co',
         value: siteInfoDate
       }).save(function (err) {
         if (err) {

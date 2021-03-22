@@ -32,6 +32,7 @@
     "moment": "^2.12.0",
     "mongoose": "<=4.11.13",
     "request": "^2.75.0",
+    "request-promise": "^4.2.6",
     "require-all": "^2.0.0",
     "rimraf": "^2.5.2",
     "serve-favicon": "^2.2.1",
@@ -56,6 +57,7 @@
   "main": "bin/www",
   "scripts": {
     "start": "gulp default && node ./bin/www",
-    "build": "gulp build && node ./bin/www"
+    "build": "gulp build && node ./bin/www",
+    "zip": "sh zip"
   }
 }

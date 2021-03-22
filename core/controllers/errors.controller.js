@@ -27,7 +27,9 @@ exports.error = function (err, req, res, next) {
   }
 
   async.parallel({
-    siteInfo: siteInfoService.get,
+    siteInfo: function (callback) {
+      return siteInfoService.get(req, callback);
+    },
     navigation: function (callback) {
       categoriesService.navigation({}, callback);
     }

@@ -22,7 +22,9 @@ module.exports = function (req, res, next) {
     if (!category) return next();
 
     async.parallel({
-      siteInfo: siteInfoService.get,
+      siteInfo: function (callback) {
+        return siteInfoService.get(req, callback);
+      },
       navigation: function (callback) {
         categoriesService.navigation({ current: channelPath }, callback);
       },

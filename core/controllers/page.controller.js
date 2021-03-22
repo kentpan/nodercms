@@ -21,7 +21,9 @@ module.exports = function (req, res, next) {
 
     // 读取单页所需数据
     async.parallel({
-      siteInfo: siteInfoService.get,
+      siteInfo: function (callback) {
+        return siteInfoService.get(req, callback);
+      },
       navigation: function (callback) {
         categoriesService.navigation({ current: page.path }, callback);
       }

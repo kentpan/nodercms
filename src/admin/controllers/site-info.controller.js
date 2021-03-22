@@ -9,6 +9,8 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
      * 初始化变量
      */
     $scope.transmitting = true;
+    $scope.domains = [];
+    $scope.domain = '';
     $scope.themes = [];
     $scope.theme = '';
     $scope.title = '';
@@ -41,31 +43,61 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
     /**
      * 获取网站配置
      */
-    $http.get('/api/site-info')
-      .success(function (result) {
-        console.log(result);
-        $scope.themes = result.themes;
-        $scope.theme = result.siteInfo.theme || 'default';
-        $scope.title = result.siteInfo.title;
-        $scope.keywords = result.siteInfo.keywords;
-        $scope.description = result.siteInfo.description;
-        $scope.codeHeader = result.siteInfo.codeHeader;
-        $scope.codeFooter = result.siteInfo.codeFooter;
-        $scope.codeWeixin = result.siteInfo.codeWeixin;
-        $scope.weixinQR = result.siteInfo.weixinQR;
-        $scope.qqCode = result.siteInfo.qqCode;
-        $scope.weixin = result.siteInfo.weixin;
-        $scope.phoneCode = result.siteInfo.phoneCode;
-
-        $scope.transmitting = false;
+    $scope.getInfoWithDomain = function () {
+      var domain = $scope.domain || location.hostname;
+      domain = domain.indexOf('127.0.0.1') > -1 ? 'www.yoozworld.co' : domain;
+      if (!/^www\./.test(domain)) {
+        domain = 'www.' + domain;
+      }
+      $http.get('/api/site-info', {
+        params: {
+          host: domain
+        }
       })
-      .error(function () {
-        $scope.$emit('notification', {
-          type: 'danger',
-          message: '获取网站配置失败'
-        });
-      });
+        .success(function (result) {
+          console.log($scope.domain, result);
+          $scope.themes = result.themes;
+          $scope.theme = result.siteInfo.theme || 'default';
+          $scope.domains = [
+            {
+              name: 'www.yoozworld.co',
+              value: 'www.yoozworld.co'
+            },
+            {
+              name: 'www.yooz.org.cn',
+              value: 'www.yooz.org.cn'
+            },
+            {
+              name: 'www.yooz.ren',
+              value: 'www.yooz.ren'
+            },
+            {
+              name: 'www.yooz.net.cn',
+              value: 'www.yooz.net.cn'
+            }
+          ];
+          $scope.domain = $scope.domain || result.siteInfo.domain || $scope.website.hostname || 'www.yoozworld.co';
+          $scope.title = result.siteInfo.title;
+          $scope.keywords = result.siteInfo.keywords;
+          $scope.description = result.siteInfo.description;
+          $scope.codeHeader = result.siteInfo.codeHeader;
+          $scope.codeFooter = result.siteInfo.codeFooter;
+          $scope.codeWeixin = result.siteInfo.codeWeixin;
+          $scope.weixinQR = result.siteInfo.weixinQR;
+          $scope.qqCode = result.siteInfo.qqCode;
+          $scope.weixin = result.siteInfo.weixin;
+          $scope.phoneCode = result.siteInfo.phoneCode;
 
+          $scope.transmitting = false;
+        })
+        .error(function () {
+          $scope.$emit('notification', {
+            type: 'danger',
+            message: '获取网站配置失败'
+          });
+        });
+    }
+    $scope.getInfoWithDomain();
     /**
      * 更新网站配置
      */
@@ -74,6 +106,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
 
       $http.put('/api/site-info', {
         theme: $scope.theme,
+        domain: $scope.domain,
         title: $scope.title,
         keywords: $scope.keywords,
         description: $scope.description,

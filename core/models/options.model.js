@@ -9,6 +9,11 @@ var optionsSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // 绑定的域名
+  domain: {
+    type: String,
+    required: true
+  },
 
   // 值
   value: mongoose.Schema.Types.Mixed

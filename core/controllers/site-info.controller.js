@@ -14,7 +14,9 @@ var siteInfoService = require('../services/site-info.service');
 exports.get = function (req, res) {
   async.parallel({
     themes: themes.get,
-    siteInfo: siteInfoService.get
+    siteInfo: function (callback) {
+      return siteInfoService.get(req, callback);
+    }
   }, function (err, results) {
     if (err) {
       logger[err.type]().error(__filename, err);
@@ -37,6 +39,13 @@ exports.get = function (req, res) {
  */
 exports.update = function (req, res) {
   req.checkBody({
+    'domain': {
+      notEmpty: {
+        options: [true],
+        errorMessage: 'domain 不能为空'
+      },
+      isString: { errorMessage: 'domain 需为字符串' }
+    },
     'theme': {
       notEmpty: {
         options: [true],
@@ -60,6 +69,7 @@ exports.update = function (req, res) {
 
   var data = {
     theme: req.body.theme,
+    domain: req.body.domain,
     title: req.body.title,
     keywords: req.body.keywords,
     description: req.body.description,

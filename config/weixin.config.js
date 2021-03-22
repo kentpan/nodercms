@@ -1,20 +1,21 @@
-var session = require('express-session');
-var mongoStore = require('connect-mongo')(session);
-var mongoose = require('mongoose');
-
 module.exports = {
-  appid: 'wx106d2c2ef561f166',
-  secret: 'c7e701e5fe606eddb3a34cda9d62b002',
-  name: 'yoozwebsiteWXTOKEN',
-  token: '',
-  expire: 2 * 3600 - 5 * 60,
-  lastTime: '',
-  cookie: {
-    httpOnly: true
+  name: 'weixinToken',
+  apis: {
+    token: {
+      url: 'https://api.weixin.qq.com/cgi-bin/token',
+      params: {
+        grant_type: 'client_credential',
+        appid: 'wx106d2c2ef561f166',
+        secret: 'c7e701e5fe606eddb3a34cda9d62b002'
+      }
+    },
+    ticket: {
+      url: 'https://api.weixin.qq.com/cgi-bin/ticket/getticket',
+      params: {
+        type: 'jsapi',
+        access_token: ''
+      }
+    }
   },
-  store: new mongoStore({
-    mongooseConnection: mongoose.connection
-  }),
-  resave: false,
-  saveUninitialized: false
+  lastTime: ''
 };
