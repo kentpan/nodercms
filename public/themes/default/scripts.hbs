@@ -26,8 +26,9 @@ $(document).ready(function(){
             }
             if (res && (+res.errno === 0 || +res.status === 0) && res.data) {
                 var options = {
-                    title: '',
-                    link: '',
+                    title: document.title,
+                    image_url: location.protocol + '//' + location.hostname + '/themes/default/assets/img/yooz-logo.png',
+                    link: location.href.split('#')[0],
                     content: '',
                     wx: {
                         appId: res.data.appId,

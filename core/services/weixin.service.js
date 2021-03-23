@@ -27,7 +27,7 @@ var getRandromKey = function () {
 exports.get = async function (req, callback) {
   var weixinTokenCache = cache.get('weixinToken');
   var weixinTicketCache = cache.get('weixinTicket');
-  var originUrl = req.url.split('#')[0];
+  var originUrl = req.query && req.query.url || req.url.split('#')[0];
   console.log('weixinTokenCache=====>',  weixinTokenCache);
   console.log('weixinTicketCache=====>', weixinTicketCache);
   if (!weixinTicketCache) {
