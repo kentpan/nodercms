@@ -9,7 +9,7 @@ mkdir -p ${OUTPUT}
 rm -rf ${OUTPUT}/*
 echo -e "开始打包：\033[35m ${projectName}.tar.gz \033[0m"
 
-tar -zcvf ${OUTPUT}/${projectName}.tar.gz bin/ config/ core/ lib/ public/ src/ tmp/ .gitignore app.js package.json pm2.config.js
+tar -zcvf ${OUTPUT}/${projectName}.tar.gz bin/ config/ core/ lib/ public/themes/ src/ .gitignore app.js package.json pm2.config.js
 
 
 echo -e "\033[42;30m ${projectName}.tar.gz 打包成功！ \033[0m \n\n"

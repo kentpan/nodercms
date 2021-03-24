@@ -1,0 +1,128 @@
+<div class="container">
+  {{> weixin}}
+  <div class="row">
+    <div class="col-md-9">
+      <ol class="breadcrumb">
+        <li><a href="/">柚子首页</a></li>
+        <li class="active">搜索</li>
+      </ol>
+      {{#foreach list.contents}}
+        <div class="media">
+          <h3 class="media-heading text-overflow margin-bottom-10"><a href="{{url}}" title="{{title}}" target="_blank">{{title}}</a></h3>
+          {{> thumb isLink="true" styles=""}}
+          {{!-- {{#if thumbnail}}
+            <a class="media-left" href="{{url}}" title="{{title}}" target="_blank">
+              <img class="media-object" src="{{thumbnail.src}}" title="{{title}}" alt="{{title}}">
+              <em>人气：{{reading.total}}</em>
+            </a>
+          {{/if}} --}}
+          <div class="media-body text-muted">
+            {{#if abstract}}
+              <p>{{abstract}}</p>
+            {{/if}}
+            {{#if extensions.types}}<p>类型：{{extensions.types}}</p>{{/if}}
+            {{#if extensions.g_face}}<p>外观：{{extensions.g_face}}</p>{{/if}}
+            {{#if extensions.taste}}<p>烟弹口味：{{extensions.taste}}</p>{{/if}}
+            {{#if extensions.ration}}<p>尼古丁含量：{{extensions.ration}}</p>{{/if}}
+            {{#if extensions.common_price}}
+              {{> price classes="pull-right"}}
+            {{else}}
+              <p{{#if thumbnail}} class="article-bottom"{{/if}}><span>{{dateformat date format="YYYY-MM-DD HH:mm"}}</span><span class="pull-right">热度：{{reading.total}}</span></p>
+            {{/if}}
+          </div>
+        </div>
+        <hr>
+      {{/foreach}}
+      {{!-- <div class="col-md-12" style="margin: 0 -30px 20px; width: auto;">
+        {{#foreach list.contents limit="10"}}
+          {{#if isArticle}}
+          <div class="" style="margin-right: 15px;margin-left: 15px;margin-bottom: 10px; padding-bottom: 10px; {{#if isArticle}}border-bottom: 1px solid #efefef;{{/if}}">
+            <h3 class="media-heading text-overflow margin-bottom-10"><a href="{{href}}" title="{{title}}" target="_blank">{{title}}</a></h3>
+            {{#if thumbnail}}
+              <a class="media-left" href="{{href}}" title="{{title}}" target="_blank">
+                <img class="media-object" style="width: 100px;" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}">
+              </a>
+            {{/if}}
+            <div class="media-body text-muted">
+              {{#if abstract}}
+                <p class="media-abstract"><a href="{{href}}" title="{{title}}" target="_blank">{{abstract}}</a></p>
+              {{/if}}
+              <p{{#if abstract}} class="article-bottom"{{/if}}><span>{{dateformat date format="YYYY年MM月DD日 HH:mm"}}</span><span class="pull-right">热度：{{reading.total}}</span></p>
+            </div>
+          </div>
+          {{/if}}
+          {{#if isProduct}}
+          <div class="col-md-6" style="margin-bottom: 10px;">
+            <div class="media" style="margin-right: 0;padding: 10px;border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,.5); {{#if isArticle}}border-bottom: 1px solid #efefef;{{/if}}">
+              {{#if thumbnail}}
+                <a class="media-left" href="{{href}}" title="{{title}}" target="_blank">
+                  <img class="media-object" style="box-shadow: none;width: 160px;" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}">
+                  <em>人气：{{reading.total}}</em>
+                </a>
+              {{/if}}
+              <div class="media-body text-muted">
+                <h4 class="media-heading text-overflow margin-bottom-10" style="white-space: normal;">
+                  <a href="{{href}}" title="{{title}}" target="_blank">{{title}}</a>
+                </h4>
+                {{#if extensions.types}}<p>类型：{{extensions.types}}</p>{{/if}}
+                {{#if extensions.g_face}}<p>外观：{{extensions.g_face}}</p>{{/if}}
+                {{#if extensions.taste}}<p>烟弹口味：{{extensions.taste}}</p>{{/if}}
+                {{#if extensions.ration}}<p>尼古丁含量：{{extensions.ration}}</p>{{/if}}
+                
+                <p class="show_price">
+                  {{#if extensions.common_price}}<span>官方零售价：<strong>￥{{extensions.common_price}}</strong></span><br>{{/if}}
+                  <span class="text-red">询底价：<input type="button" data-clipboard-action="copy" data-clipboard-target="#weixinCode" class="get_price_btn" value="点击复制微信号咨询"/></span>
+                </p>
+              </div>
+            </div>
+          </div>
+          {{/if}}
+        {{/foreach}}
+      </div> --}}
+      <nav class="text-center">
+        <ul class="pagination">
+          {{#foreach list.pagination}}
+            <li {{#if active}}class="active"{{/if}}>
+              <a href="{{url}}">{{name}}</a>
+            </li>
+          {{/foreach}}
+        </ul>
+      </nav>
+    </div>
+    <div class="col-md-3 hidden-xs hidden-sm">
+      <div class="panel panel-default">
+        <div class="panel-heading">热度总排行</div>
+        <ul class="list-group">
+          {{#foreach readingList.total limit="5"}}
+            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+          {{/foreach}}
+        </ul>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">热度月排行</div>
+        <ul class="list-group">
+          {{#foreach readingList.month limit="5"}}
+            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+          {{/foreach}}
+        </ul>
+      </div>
+      {{!-- <div class="panel panel-default">
+        <div class="panel-heading">栏目热度本周排行</div>
+        <ul class="list-group">
+          {{#foreach readingList.week limit="5"}}
+            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+          {{/foreach}}
+        </ul>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">栏目热度今日排行</div>
+        <ul class="list-group">
+          {{#foreach readingList.day limit="5"}}
+            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+          {{/foreach}}
+        </ul>
+      </div>
+      --}}
+    </div>
+  </div>
+</div>

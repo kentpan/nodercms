@@ -1,0 +1,31 @@
+{{#if features}}
+  <div class="row">
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+      {{#features 'home-focus-pictures'}}
+        <li data-target="#carousel" data-slide-to="{{@index}}" {{#if @first}}class="active"{{/if}}></li>
+      {{/features}}
+      </ol>
+      <div class="carousel-inner" role="listbox">
+      {{#features 'home-focus-pictures'}}
+        <div class="item {{#if @first}}active{{/if}}">
+          {{#if url}}
+            <a href="{{url}}" title="{{title}}" target="_blank"><img style="width: 100%;" title="{{title}}" src="{{thumbnail.src}}" alt="{{title}}『电子烟,YOOZ,YOOZ柚子,YOOZ电子烟官网,YOOZ加盟,YOOZ烟弹,YOOZ代理』"></a>
+          {{else}}
+            <img style="width: 100%;" title="{{title}}" src="{{thumbnail.src}}" alt="{{title}}『电子烟,YOOZ,YOOZ柚子,YOOZ电子烟官网,YOOZ加盟,YOOZ烟弹,YOOZ代理』">
+          {{/if}}
+          {{!-- {{#if url}}<div class="carousel-caption"><h3><a href="{{url}}" title="{{title}}" target="_blank">{{title}}</a></h3></div>{{/if}} --}}
+        </div>
+      {{/features}}
+      </div>
+      <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Prev</span>
+      </a>
+      <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  {{/if}}

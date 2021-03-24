@@ -19,3 +19,7 @@ public/media/*
 !public/media/.gitkeep
 public/themes/*
 !public/themes/default
+!public/themes/yooz.org.cn
+!public/themes/yooz.ren
+!public/themes/yooz.net.cn
+!public/themes/yoozworld.co
