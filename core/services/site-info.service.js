@@ -2,13 +2,15 @@ var logger = require('../../lib/logger.lib');
 var cache = require('../../lib/cache.lib');
 var optionsModel = require('../models/options.model');
 
+const defaultDomain = 'www.yooz.org.cn';
 
 function getDomain (req) {
-  var domain = (req.query && req.query.host) || req.domain || req.headers.host || 'www.yoozworld.co';
-  domain = domain.indexOf('127.0.0.1') > -1 ? 'www.yoozworld.co' : domain;
+  var domain = (req.query && req.query.host) || req.domain || req.headers.host || defaultDomain;
+  domain = domain.indexOf('127.0.0.1') > -1 ? defaultDomain : domain;
   if (!/^www\./.test(domain)) {
     domain = 'www.' + domain;
   }
+  domain = domain.replace(/\:\d+$/, '');
   return domain;
 }
 /**
@@ -58,7 +60,7 @@ exports.save = function (options, callback) {
       console.log('域名配置文件已存在，直接更新 =>', domain);
       optionsModel.findOneAndUpdate({ name: 'siteInfo', 'value.domain': domain }, {
         value: options.data,
-        domain: domain || 'www.yoozworld.co'
+        domain: domain || defaultDomain
       }, { runValidators: true }, function (err) {
         if (err) {
           err.type = 'database';
@@ -87,7 +89,7 @@ exports.save = function (options, callback) {
   });
   // optionsModel.findOneAndUpdate({ name: 'siteInfo', domain: options.data.domain }, {
   //   value: options.data,
-  //   domain: options.data.domain || 'www.yoozworld.co'
+  //   domain: options.data.domain || defaultDomain
   // }, { runValidators: true }, function (err) {
   //   if (err) {
   //     err.type = 'database';

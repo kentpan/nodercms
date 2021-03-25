@@ -25,6 +25,35 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
     $scope.phoneCode = '';
     $scope.editAuth = false;
     $scope.readAuth = false;
+    $scope.defaultDomain = 'www.yooz.org.cn';
+    var currentIndex = 0;
+    var domainList = [
+      {
+        name: 'www.yooz.org.cn',
+        value: 'www.yooz.org.cn'
+      },
+      {
+        name: 'www.yoozworld.co',
+        value: 'www.yoozworld.co'
+      },
+      {
+        name: 'www.yooz.ren',
+        value: 'www.yooz.ren'
+      },
+      {
+        name: 'www.yooz.net.cn',
+        value: 'www.yooz.net.cn'
+      }
+    ];
+    for (var index = 0; index < domainList.length; index++) {
+      if ($scope.website.hostname.indexOf(domainList[index].name) > -1) {
+        currentIndex = index;
+      }
+      if ($scope.defaultDomain.indexOf(domainList[index].name) > -1) {
+        domainList[index].name = domainList[index].name + ' - [默认域名]'
+      }
+    }
+    domainList = domainList.splice(currentIndex, 1).concat(domainList);
 
     /**
      * 读取用户编辑权限以及返回读取当前单页
@@ -45,7 +74,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
      */
     $scope.getInfoWithDomain = function () {
       var domain = $scope.domain || location.hostname;
-      domain = domain.indexOf('127.0.0.1') > -1 ? 'www.yoozworld.co' : domain;
+      domain = domain.indexOf('127.0.0.1') > -1 ? $scope.defaultDomain : domain;
       if (!/^www\./.test(domain)) {
         domain = 'www.' + domain;
       }
@@ -58,25 +87,8 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
           console.log($scope.domain, result);
           $scope.themes = result.themes;
           $scope.theme = result.siteInfo.theme || 'default';
-          $scope.domains = [
-            {
-              name: 'www.yoozworld.co',
-              value: 'www.yoozworld.co'
-            },
-            {
-              name: 'www.yooz.org.cn',
-              value: 'www.yooz.org.cn'
-            },
-            {
-              name: 'www.yooz.ren',
-              value: 'www.yooz.ren'
-            },
-            {
-              name: 'www.yooz.net.cn',
-              value: 'www.yooz.net.cn'
-            }
-          ];
-          $scope.domain = $scope.domain || result.siteInfo.domain || $scope.website.hostname || 'www.yoozworld.co';
+          $scope.domains = domainList;
+          $scope.domain = $scope.domain || result.siteInfo.domain || $scope.website.hostname || $scope.defaultDomain;
           $scope.title = result.siteInfo.title;
           $scope.keywords = result.siteInfo.keywords;
           $scope.description = result.siteInfo.description;

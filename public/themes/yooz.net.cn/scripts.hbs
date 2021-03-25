@@ -12,12 +12,13 @@ $(document).ready(function(){
            console.log('QQ复制成功', qqCode);
            alert('QQ号复制成功，请打开QQ添加好友');
      });
+     var originUrl = location.href.split('#')[0];
     // wechat share
     loadScript('https://res.wx.qq.com/open/js/jweixin-1.6.0.js').then(() => {
         var shareOption = {
             url: '/api/wxinfo',
             data: {
-              url: location.href.split('#')[0]
+              url: originUrl
             }
         };
         return $.ajax(shareOption).then(res => {
@@ -26,8 +27,9 @@ $(document).ready(function(){
             }
             if (res && (+res.errno === 0 || +res.status === 0) && res.data) {
                 var options = {
-                    title: '',
-                    link: '',
+                    title: document.title,
+                    image_url: location.protocol + '//' + location.hostname + '/themes/default/assets/img/yooz-logo.png',
+                    link: originUrl,
                     content: '',
                     wx: {
                         appId: res.data.appId,
@@ -66,7 +68,6 @@ $(document).ready(function(){
         });
     }
     function initShare(options = {}) {
-        var originUrl = location.href.split('#')[0];
         var jsApiListOpt = [
             'onMenuShareTimeline',
             'onMenuShareAppMessage',

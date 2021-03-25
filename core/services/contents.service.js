@@ -320,12 +320,12 @@ exports.save = function (options, callback) {
   // ];
   var hostList = [
     {
-      host: 'http://www.yoozworld.co',
-      path: path.resolve(__dirname, '../../public/site.yoozworld.co.txt')
-    },
-    {
       host: 'http://www.yooz.org.cn',
       path: path.resolve(__dirname, '../../public/site.yooz.org.cn.txt')
+    },
+    {
+      host: 'http://www.yoozworld.co',
+      path: path.resolve(__dirname, '../../public/site.yoozworld.co.txt')
     },
     {
       host: 'http://www.yooz.ren',
