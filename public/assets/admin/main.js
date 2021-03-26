@@ -3391,10 +3391,12 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
      */
     $scope.getInfoWithDomain = function () {
       var domain = $scope.domain || location.hostname;
-      domain = domain.indexOf('127.0.0.1') > -1 ? $scope.defaultDomain : domain;
+      domain = /127\.0\.0\.1|39\.103\.156\.189/.test(domain) ? $scope.defaultDomain : domain;
       if (!/^www\./.test(domain)) {
         domain = 'www.' + domain;
       }
+      domain = domain.replace(/\:\d+\/?$/, '');
+
       $http.get('/api/site-info', {
         params: {
           host: domain

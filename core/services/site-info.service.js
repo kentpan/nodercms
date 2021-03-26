@@ -6,11 +6,11 @@ const defaultDomain = 'www.yooz.org.cn';
 
 function getDomain (req) {
   var domain = (req.query && req.query.host) || req.domain || req.headers.host || defaultDomain;
-  domain = domain.indexOf('127.0.0.1') > -1 ? defaultDomain : domain;
+  domain = /127\.0\.0\.1|39\.103\.156\.189/.test(domain) ? defaultDomain : domain;
   if (!/^www\./.test(domain)) {
     domain = 'www.' + domain;
   }
-  domain = domain.replace(/\:\d+$/, '');
+  domain = domain.replace(/\:\d+\/?$/, '');
   return domain;
 }
 /**
