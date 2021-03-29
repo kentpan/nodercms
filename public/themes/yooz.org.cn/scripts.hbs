@@ -27,10 +27,10 @@ $(document).ready(function(){
             }
             if (res && (+res.errno === 0 || +res.status === 0) && res.data) {
                 var options = {
-                    title: document.title,
-                    image_url: location.protocol + '//' + location.hostname + '/themes/default/assets/img/yooz-logo.png',
-                    link: originUrl,
-                    content: '',
+                    title: {{#if wxshare_title}}'{{wxshare_title}}'{{else}}(document.getElementById('title_wxshare') && document.getElementById('title_wxshare').innerHTML) || document.title{{/if}},
+                    image_url: location.protocol + '//' + location.hostname + {{#if wxshare_image}}'{{wxshare_image.src}}'{{else}}'/themes/yooz.org.cn/assets/img/yooz-logo.png'{{/if}},
+                    linkUrl: originUrl,
+                    content: {{#if wxshare_content}}'{{wxshare_content}}'{{else}}(document.getElementById('content_abstract') && document.getElementById('content_abstract').innerHTML) || (document.getElementById('wxshare_content') && document.getElementById('wxshare_content').content) || ''{{/if}},
                     wx: {
                         appId: res.data.appId,
                         timestamp: res.data.timestamp,
@@ -95,7 +95,7 @@ $(document).ready(function(){
             title: options.title || 'yooz柚子二代电子烟实体店授权销售渠道和代理',
             link: options.linkUrl || originUrl,
             content: options.content || 'YOOZ柚子二代一手货源,正规品牌授权渠道代理,拥有YOOZ柚子实体店,yooz柚子二代微商购买,yooz柚子二代网上购买',
-            icon: options.iconUrl || options.image_url || '/themes/default/assets/img/yooz-logo.png',
+            icon: options.iconUrl || options.image_url || '/themes/yooz.org.cn/assets/img/yooz-logo.png',
             source: options.source || ''
         };
         var wxShare = {

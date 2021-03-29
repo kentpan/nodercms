@@ -57,12 +57,7 @@ module.exports = function (req, res, next) {
       if (err && !results.category) return next();
       if (err) return res.status(500).end();
 
-      // if (!content.extensions) {
-      //   content.extensions = {};
-      // }
-      // if (!content.extensions.author_info) {
-      //   content.extensions.author_info = results.siteInfo.codeWeixin;
-      // }
+      console.log(content);
       res.render(_.get(results.category, 'views.content'), {
         layout: _.get(results.category, 'views.layout'),
         siteInfo: results.siteInfo,

@@ -18,11 +18,11 @@
             </div>
           {{/if}} --}}
           <div class="media-body">
-            <h4 class="media-heading text-overflow margin-bottom-10" style="color: #000;">
+            <h4 class="media-heading text-overflow margin-bottom-10" style="color: #000;" id="title_wxshare">
               {{title}}
             </h4>
             {{#if abstract}}
-              <p class="media-abstract">{{{abstract}}}</p>
+              <p class="media-abstract" id="wxshare_content">{{{abstract}}}</p>
             {{/if}}
             {{#if extensions.types}}<p>类型：{{extensions.types}}</p>{{/if}}
             {{#if extensions.g_face}}<p>外观：{{extensions.g_face}}</p>{{/if}}

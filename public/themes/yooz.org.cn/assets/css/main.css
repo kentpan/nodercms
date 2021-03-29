@@ -248,6 +248,8 @@ h6, .h6 {
 
 .container .breadcrumb {
   white-space: nowrap;
+  width: 100%;
+  display: inline-block;
 }
 .container .item-list .pull-right::before {
   content: "";
@@ -361,7 +363,7 @@ h6, .h6 {
   font-size: 14px;
   color: #7a8f9a;
   line-height: 18px;
-  margin: 30px auto 10px;
+  margin: 10px auto 30px;
   text-align: center;
   float: left;
   width: 100%;
@@ -520,7 +522,7 @@ h6, .h6 {
   float: left;
   width: 30%;
   height: auto;
-  margin: 0 10px 0 0;
+  margin: 7px 10px 0 0;
 }
 .weimg-one .weixin-h,
 .weimg-one .weixin-h-w {

@@ -250,6 +250,8 @@ h6, .h6 {
   white-space: nowrap;
   background-color: #450400;
   color: #fff;
+  width: 100%;
+  display: inline-block;
 }
 .container .breadcrumb a {
   color: #fff;
@@ -378,7 +380,7 @@ h6, .h6 {
   font-size: 14px;
   color: #7a8f9a;
   line-height: 18px;
-  margin: 30px auto 10px;
+  margin: 10px auto 20px;
   text-align: center;
   float: left;
   width: 100%;

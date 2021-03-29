@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="generator" content="NodeJS">
     <meta name="keywords" content="{{#if category}}{{category.keywords}},{{/if}}{{siteInfo.keywords}}">
-    <meta name="description" content="{{#if category}}{{category.description}} —— {{/if}}{{siteInfo.description}}">
+    <meta name="description" id="wxshare_content" content="{{#if category}}{{category.description}} —— {{/if}}{{siteInfo.description}}">
     <meta itemprop="name" content="{{ siteInfo.shareTitle }}">
     <meta itemprop="image" content="{{ siteInfo.shareImage }}">
     <meta itemprop="description" name="description" content="{{ siteInfo.shareDesc }}">
@@ -15,6 +15,7 @@
     <meta name="baidu-site-verification" content="code-bigpFFKOuX" />
     <meta name="baidu-site-verification" content="code-jtq85prCj6" />
     <meta name="baidu-site-verification" content="code-hKmTs3FZHs" />
+    <meta name="sogou_site_verification" content="AtgR4isz84"/>
     <meta name="sogou_site_verification" content="RTaOPLy2jP"/>
     <meta name="sogou_site_verification" content="3yvfHPuHT6"/>
     <meta name="sogou_site_verification" content="ZOsZVOLZK8"/>
@@ -39,6 +40,7 @@
     <br>
     <br>
     {{> footer}}
-    {{> scripts}}
+    {{> scripts wxshare_title=title wxshare_content=abstract wxshare_image=thumbnail}}
+    {{!-- {{> 18alert}} --}}
   </body>
 </html>
