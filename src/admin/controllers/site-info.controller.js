@@ -54,6 +54,22 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
       }
     }
     domainList = domainList.splice(currentIndex, 1).concat(domainList);
+    
+    $scope.createSiteMap = function () {
+      if (confirm('确定要重新生成网站地图？一旦重新生成可能会影响站点SEO效果，请谨慎操作！')) {
+        return $http.get('/api/sitemap', {
+          params: {
+            domain: $scope.domain
+          }
+        }).then(function (res) {
+            console.log('response ===>', res.data);
+            return $scope.$emit('notification', {
+              type: 'success',
+              message: res.data
+            });
+        });
+      }
+    };
 
     /**
      * 读取用户编辑权限以及返回读取当前单页
@@ -112,6 +128,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
         });
     }
     $scope.getInfoWithDomain();
+
     /**
      * 更新网站配置
      */

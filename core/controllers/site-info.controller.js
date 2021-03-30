@@ -1,10 +1,14 @@
 var async = require('async');
 var fs = require('fs');
 var _ = require('lodash');
+var os = require('os');
 var path = require('path');
+var moment = require('moment');
 var logger = require('../../lib/logger.lib');
 var themes = require('../../lib/themes.lib');
 var siteInfoService = require('../services/site-info.service');
+var contentService = require('../services/contents.service');
+const { log } = require('console');
 
 /**
  * 查询网站信息
@@ -27,6 +31,103 @@ exports.get = function (req, res) {
       themes: results.themes,
       siteInfo: results.siteInfo
     });
+  });
+};
+function getFullUri(req, siteInfo, cont) {
+  return req.protocol + '://' + siteInfo.domain + cont.url;
+}
+
+function getXMLContent(req, siteInfo, cont) {
+  return `
+  <sitemap>
+    <loc>
+      ${req.protocol + '://' + siteInfo.domain + cont.url}
+    </loc>
+    <lastmod>${moment(cont.date).format('YYYY-MM-DD hh:mm:ss')}</lastmod>
+  </sitemap>`;
+}
+function createSiteMap(siteMapFile, ext, content, len) {
+  fs.stat(siteMapFile + ext, function (error) {
+    console.log('fs.stat ===>', error);
+    if (error) {
+      fs.writeFile(siteMapFile + ext, content, function(err) {
+        if (err) throw err;
+        console.log('===========>', siteMapFile + ext + ' => ' + len  + '条站点地图生成！');
+      });
+    } else {
+      fs.rename(siteMapFile + ext, siteMapFile + '-' + moment(new Date()).format('YYYYMMDDhhmmss')  + ext, (err) => {
+        if (err) throw err;
+        fs.writeFile(siteMapFile + ext, content, function(err) {
+          if (err) throw err;
+          console.log('===========>', siteMapFile + ext + ' => ' + len  + '条站点地图新生成！');
+        });
+      });
+    }
+  });
+}
+/**
+ * 生成网站地图
+ * @param {Object} req
+ * @param {Object} res
+ */
+exports.sitemap = function (req, res) {
+  var query = req.query || {};
+  query.deleted = false;
+  query.status = 'pushed';
+  async.parallel({
+      siteInfo: function (callback) {
+        return siteInfoService.get(req, callback);
+      },
+      links: function (callback) {
+        return contentService.list(query, callback);
+      }
+    }, function (err, results) {
+    if (err) {
+      logger[err.type]().error(__filename, err);
+      return res.status(500).end();
+    }
+    var contents = results && results.links && results.links.contents;
+    if (!contents || (contents && !contents.length)) {
+      return res.status(200).json({
+        status: 200,
+        message: '获取内容列表失败'
+      });
+    }
+    var siteInfo = {
+      ...(results.siteInfo || {}),
+      ...query
+    };
+    
+    console.log('req.query ======>', req.query, siteInfo);
+    contents = [
+      {url: '/', date: '2021-03-15 08:48:48'},
+      {url: '/news', date: '2021-03-15 08:48:48'},
+      {url: '/product', date: '2021-03-15 08:48:48'}
+    ].concat(contents);
+    var currentDomain = (query.domain || '').replace('www.', '');
+    var siteMapFile = path.resolve(__dirname, '../../public/site.' + currentDomain);
+    var ext = '.txt';
+    var mapList = [];
+    contents.forEach(function(cont) {
+      mapList.push(getFullUri(req, siteInfo, cont));
+    });
+    var len = mapList.length;
+    // 生成.txt
+    createSiteMap(siteMapFile, ext, mapList.join(os.EOL), len);
+
+    ext = '.xml';
+    mapList = [];
+    contents.forEach(function(cont) {
+      mapList.push(getXMLContent(req, siteInfo, cont));
+    });
+
+    mapList = `<sitemapindex>${mapList.join('')}
+</sitemapindex>
+    `;
+    // 生成.xml
+    createSiteMap(siteMapFile, ext, mapList, len);
+
+    res.status(200).end(len + ' 条站点地图已生成！');
   });
 };
 

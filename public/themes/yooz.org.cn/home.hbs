@@ -30,7 +30,7 @@
               {{#foreach contents limit="10"}}
                 {{#if isArticle}}
                 <div class="" style="margin-right: 15px;margin-left: 15px;margin-bottom: 10px; padding-bottom: 10px; {{#if isArticle}}border-bottom: 1px solid #efefef;{{/if}}">
-                  <h3 class="media-heading text-overflow margin-bottom-10"><a href="{{url}}" title="{{title}}" target="_blank">{{title}}</a></h3>
+                  <h3 class="media-heading text-overflow margin-bottom-10" style="white-space: normal;"><a href="{{url}}" title="{{title}}" target="_blank">{{title}}</a></h3>
                   {{> thumb isLink="true" styles="width: 120px;"}}
                   {{!-- {{#if thumbnail}}
                     <a class="media-left" href="{{url}}" title="{{title}}" target="_blank">

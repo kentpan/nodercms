@@ -10,10 +10,11 @@
     <div class="panel-body">
       <div class="form-group">
         <label for="inputDomain" class="col-sm-2 control-label">* 绑定域名：</label>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
           <select ng-if="editAuth" ng-model="$parent.domain" ng-options="domain.value as domain.name for domain in domains" id="inputDomain" ng-disabled="transmitting" class="form-control" ng-change="$parent.getInfoWithDomain()" required></select>
           <p ng-if="readAuth && !editAuth" class="form-control-static">{{domain}}</p>
         </div>
+        <button type="button" class="btn btn-primary col-sm-2" ng-click="createSiteMap()">生成siteMap</button>
       </div>
       <div ng-class="{ 'has-error': siteInfoForm.title.$touched && siteInfoForm.title.$invalid }" class="form-group">
         <label for="inputTitle" class="col-sm-2 control-label">* 网站标题：</label>

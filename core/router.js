@@ -116,6 +116,10 @@ module.exports = {
       get: [110100, 'site-info.get'],
       put: [110101, 'site-info.update']
     },
+    // 更新网站地图
+    '/sitemap': {
+      get: [110101, 'site-info.sitemap']
+    },
 
     // 分类管理
     '/categories': {
