@@ -62,12 +62,12 @@
     {{!-- <div class="col-md-3 hidden-xs hidden-sm"> --}}
     <div class="col-md-3">
       <div class="panel panel-default">
-        <h4 class="panel-heading" style="margin: 0;">人气总榜单</h4>
+        <h4 class="panel-heading" style="margin: 0;">产品总榜单</h4>
         <ul class="list-group">
           {{#foreach readingList.total limit="5"}}
-            <a href="{{href}}" class="list-group-item text-overflow" style="text-align: center;">
+            <a href="{{href}}" class="list-group-item text-overflow" title="{{title}}" style="text-align: center;">
               {{#if thumbnail}}
-                <img class="media-object" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}" width="100%">
+                <img class="media-object" src="{{thumbnail.src}}" title="{{title}}" alt="{{title}}" width="100%">
               {{/if}}
               <h6>{{title}}</h6>
             </a>
@@ -75,12 +75,12 @@
         </ul>
       </div>
       <div class="panel panel-default">
-        <h4 class="panel-heading" style="margin: 0;">人气月榜单</h4>
+        <h4 class="panel-heading" style="margin: 0;">产品月榜单</h4>
         <ul class="list-group">
           {{#foreach readingList.month limit="5"}}
-            <a href="{{href}}" class="list-group-item text-overflow" style="text-align: center;">
+            <a href="{{href}}" class="list-group-item text-overflow" title="{{title}}" style="text-align: center;">
               {{#if thumbnail}}
-                <img class="media-object" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}" width="100%">
+                <img class="media-object" src="{{thumbnail.src}}" title="{{title}}" alt="{{title}}" width="100%">
               {{/if}}
               <h6>{{title}}</h6>
             </a>

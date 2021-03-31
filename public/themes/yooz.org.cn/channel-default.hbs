@@ -32,7 +32,7 @@
         <div class="panel-heading">热度总排行</div>
         <ul class="list-group">
           {{#foreach readingList.total limit="5"}}
-            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+            <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
@@ -40,7 +40,7 @@
         <div class="panel-heading">热度月排行</div>
         <ul class="list-group">
           {{#foreach readingList.month limit="5"}}
-            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+            <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
