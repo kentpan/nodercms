@@ -3,6 +3,10 @@ body {
   font-family: Helvetica, Arial, "Hiragino Sans GB", sans-serif;
   font-size: 12px;
   line-height: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 a {
@@ -410,6 +414,10 @@ h6, .h6 {
 .weixin-code #weixinCode,
 .weixin-code #qqCode {
   color: #000;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
 }
 .weixin-code .copy_btn {
   background-color: #f00;
@@ -534,6 +542,10 @@ h6, .h6 {
 .weimg-one .weixin-h-w {
   margin-top: 10px;
   font-size: 14px;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
 }
 .content-footer {
   text-align: center;
@@ -546,7 +558,23 @@ h6, .h6 {
   line-height: 1.8;
   margin: 60px auto 30px;
 }
+.user-select-auto {
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
 
+.get_price_btn_wx,
+.get_price_btn_qq {
+  cursor: pointer;
+}
+
+.get_price_btn_wx:hover,
+.get_price_btn_qq:hover {
+  background-color: #f00;
+  color: #fff !important;
+}
 .yooz-footer {
 }
 .yooz-footer table {
@@ -576,6 +604,10 @@ h6, .h6 {
 .yooz-footer table td h5 {
   font-size: 13px;
   color: #ececec;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
 }
 .yooz-footer table td p {
   font-size: 12px;

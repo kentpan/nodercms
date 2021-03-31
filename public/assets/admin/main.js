@@ -3371,6 +3371,22 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
       }
     }
     domainList = domainList.splice(currentIndex, 1).concat(domainList);
+    
+    $scope.createSiteMap = function () {
+      if (confirm('确定要重新生成网站地图？一旦重新生成可能会影响站点SEO效果，请谨慎操作！')) {
+        return $http.get('/api/sitemap', {
+          params: {
+            domain: $scope.domain
+          }
+        }).then(function (res) {
+            console.log('response ===>', res.data);
+            return $scope.$emit('notification', {
+              type: 'success',
+              message: res.data
+            });
+        });
+      }
+    };
 
     /**
      * 读取用户编辑权限以及返回读取当前单页
@@ -3429,6 +3445,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
         });
     }
     $scope.getInfoWithDomain();
+
     /**
      * 更新网站配置
      */
@@ -4503,6 +4520,27 @@ angular.module('directives').directive('ndEditor',  ['$templateCache', '$timeout
                     icon: { fa: 'fa fa-video-camera' },
                     callback: function (e) {
                       $('#videoInsert').modal('show');
+                    }
+                  },
+                  {
+                    name: 'cmdWeixin',
+                    title: '插入微信',
+                    hotkey: 'Ctrl+V',
+                    icon: { fa: 'fa fa-map-marker' },
+                    callback: function (e) {
+                        var selected = e.getSelection();
+                        var content = e.getContent();
+                        var isFirstN = /\n$/.test(content.substr(0, selected.start));
+                        var isLastN = /^\n/.test(content.substr(selected.end, content.length));
+                        var str = '\n**YOOZ官方授权，微信号(点击可复制→)：<span data-clipboard-action="copy" data-clipboard-target="#weixinCode_content" id="weixinCode_content" class="get_price_btn_wx user-select-auto">vivian-yoooz</span>**' +
+'\n\n<img class="user-select-auto" src="/media/202103/6042f53f074d3591b8116e93/vivian-yoooz-2.jpg" alt="vivian-yoooz-2.jpg" title="YOOZ柚子二代电子烟官网,YOOZ加盟批发代理">\n\n';
+                        
+                        e.replaceSelection(str);
+
+                        var newSelected = e.getContent().length - (content.length - selected.end);
+                        e.setSelection(newSelected, newSelected);
+                        
+                        scope.content = e.getContent();
                     }
                   }
                 ]

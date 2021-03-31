@@ -291,7 +291,8 @@ canvas {
 }
 .sign-in > .content > .brand {
   display: block;
-  margin: 0 auto 30px;
+  margin: 30px auto;
+  width: 100%;
 }
 .sign-in > .content > .panel {
   margin-bottom: 10px;
