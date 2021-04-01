@@ -1,0 +1,37 @@
+#!/bin/bash
+
+projectName="yoozcms"
+currentDate=$(date +%Y%m%d)
+databasename="yooz_website"
+mediaDir="./public/media"
+backupDir="./dump/${currentDate}"
+
+echo -e "\033[41;37m ======= 开始 ${projectName} 备份，请按任意键继续或者CTRL+C取消 ======= \033[0m \n"
+read -n 1
+
+echo -e "开始备份数据库：\033[35m ${databasename} \033[0m"
+rm -rf ${backupDir}/*
+mongodump -h 127.0.0.1 -d ${databasename} -o ${backupDir}
+tar -zcvf ${backupDir}/${databasename}_db.tar.gz ${backupDir}/${databasename}
+echo -e "\033[42;30m 数据库：${databasename} 备份成功！ \033[0m \n\n"
+
+read -p "是否需要备份整站程序？请按输入y/yes继续或者回车取消：" choose
+if [ "$choose"x = "y"x ] || [ "$choose"x = "yes"x ];then
+    echo "开始备份${projectName} 全站程序..."
+    tar -zcvf ${backupDir}/${databasename}_full_source.tar.gz bin/ config/ core/ lib/ public/ src/ tmp/ app.js .gitignore gulpfile.js LICENSE online package.json package-lock.json pm2.config.js README.md backup
+    echo "${projectName} 全站程序备份成功"
+elif [ "$choose"x = "n"x ] || [ "$choose"x = "no"x ] || [ "$choose"x = ""x ];then
+    echo "取消备份${projectName} 整站程序"
+    read -p "是否需要备份media媒体文件？请输入y/yes继续或者回车取消：" choose
+    if [ "$choose"x = "y"x ] || [ "$choose"x = "yes"x ];then
+        echo "开始备份${mediaDir} 媒体文件..."
+        tar -zcvf ${backupDir}/${databasename}_media.tar.gz ${mediaDir}
+        echo "${mediaDir} 媒体文件备份成功"
+    elif [ "$choose"x = "n"x ] || [ "$choose"x = "no"x ] || [ "$choose"x = ""x ];then
+        echo "取消备份${mediaDir} 媒体文件"
+    fi
+fi
+
+echo -e "\033[41;37m ======= ${projectName} 所有备份完成，enjoy~ ======= \033[0m \n"
+
+exit

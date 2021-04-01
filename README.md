@@ -1,38 +1,10 @@
-# NoderCMS - 轻量级内容管理系统
+nginx 301:
+if ($host ~ "^(www.yoozworld.co|yoozworld.co|www.yooz.ren|yooz.ren|www.yooz.net.cn|yooz.net.cn)") {
+    rewrite ^/(.*)$ http://www.yooz.org.cn/$1 permanent;
+}
+authorKey：TI_6d3cf74188b7385a14b8e45227eb5751
+神马主要推送api：
+curl "https://data.zhanzhang.sm.cn/push?site=www.yooz.org.cn&user_name=ayue222@126.com&resource_name=mip_add&token=TI_6d3cf74188b7385a14b8e45227eb5751" --data-binary @site.yooz.org.cn.txt
 
-NoderCMS 使用 Node.js + MongoDB 开发，拥有灵活的内容模型以及完善的权限角色机制。
-
-[官方网站](http://www.nodercms.com) | [帮助中心](http://www.nodercms.com/help) 
-
-## 演示
-- 地址：[http://demo.nodercms.com](http://demo.nodercms.com)
-- 后台：[http://demo.nodercms.com/admin](http://demo.nodercms.com/admin)
-- 账号：ghost@nodercms.com
-- 密码：123456
-
-## 安装
-
-```bash
-$ npm install --production
-$ npm start
-```
-
-完成后访问 http://localhost:3000/admin/install 进入安装程序
-
-**环境要求：**
-
-1. [Node.js](https://www.nodejs.org) v4.4.3 及以上
-2. [Mongodb](https://www.mongodb.org) v3.0.6 及以上
-
-## 重新安装
-1. 清空数据库
-2. 删除 /install.lock
-3. 访问 http://localhost:3000/admin/install 进入安装程序
-
-### 常见问题
-- [使用 Nginx 来反向代理 NoderCMS](http://www.nodercms.com/help/installation/shi-yong-nginx-lai-fan-xiang-dai-li-duo-ge-nodercms)
-- [使用 pm2 来守护 NoderCMS](http://www.nodercms.com/help/installation/shi-yong-pm2-lai-shou-hu-nodercms)
-- [推荐调用使用说明](http://www.nodercms.com/help/themes/features)
-
-## License
-NoderCMS is MIT licensed, as found in the LICENSE file.
+百度收录推送api：
+curl "http://data.zz.baidu.com/urls?site=www.yooz.org.cn&token=F4YKzs49hlXHkywV" --data-binary @site.yooz.org.cn.txt

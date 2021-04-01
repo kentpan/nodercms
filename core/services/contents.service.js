@@ -144,7 +144,7 @@ exports.list = function (options, callback) {
             return callback(err);
           }
 
-          contents = _.map(contents, function (content) {
+          contents = _.map(contents, function (content, index) {
             if (content.thumbnail) var thumbnailSrc = content.thumbnail.src;
 
             content = content.toObject();
@@ -153,7 +153,7 @@ exports.list = function (options, callback) {
             if (content.thumbnail) content.thumbnail.src = thumbnailSrc;
 
             delete content.alias;
-
+            content.id = count - index - (currentPage - 1) * pageSize;
             return content;
           });
 
@@ -165,13 +165,70 @@ exports.list = function (options, callback) {
 
     var result = {
       contents: contents,
-      pages: Math.ceil(count / pageSize)
+      pages: Math.ceil(count / pageSize),
+      total: count
     };
 
     callback(err, result);
   });
 };
+exports.all = function (options, callback) {
+  var query = {};
 
+  if (options._id) query.category = options._id;
+  if (options.words) query.title = new RegExp(options.words, 'i');
+  if (options.status) query.status = options.status;
+  if (_.isBoolean(options.deleted)) query.deleted = options.deleted;
+  if (options.date) query.date = options.date;
+
+  async.waterfall([
+    function (callback) {
+      contentsModel.count(query, function (err, count) {
+        if (err) {
+          err.type = 'database';
+          return callback(err);
+        }
+
+        if (count) {
+          callback(null, count);
+        } else {
+          callback(null, null);
+        }
+      });
+    },
+    function (count, callback) {
+      contentsModel.find(query)
+        .sort('status -date')
+        .select('status category alias date')
+        .populate('category', 'name path')
+        .exec(function (err, contents) {
+          if (err) {
+            err.type = 'database';
+            return callback(err);
+          }
+
+          contents = _.map(contents, function (content, index) {
+            content = content.toObject();
+            if (_.get(content, 'category.path')) content.url = content.category.path + '/' + content.alias;
+            delete content.alias;
+            content.id = count - index;
+            return content;
+          });
+
+          callback(null, count, contents);
+        });
+    }
+  ], function (err, count, contents) {
+    if (err) return callback(err);
+
+    var result = {
+      contents: contents,
+      total: count
+    };
+
+    callback(err, result);
+  });
+};
 /**
  * 内容总数
  * @param {Function} callback

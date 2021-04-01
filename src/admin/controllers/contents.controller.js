@@ -57,6 +57,7 @@ angular.module('controllers').controller('contents', ['$scope', '$state', '$stat
 
           $scope.contents = data.contents;
           $scope.totalPages = data.pages;
+          $scope.totals = data.total;
         }, function () {
           $scope.$emit('notification', {
             type: 'danger',

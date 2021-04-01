@@ -1884,6 +1884,7 @@ angular.module('controllers').controller('contents', ['$scope', '$state', '$stat
 
           $scope.contents = data.contents;
           $scope.totalPages = data.pages;
+          $scope.totals = data.total;
         }, function () {
           $scope.$emit('notification', {
             type: 'danger',
@@ -4532,8 +4533,8 @@ angular.module('directives').directive('ndEditor',  ['$templateCache', '$timeout
                         var content = e.getContent();
                         var isFirstN = /\n$/.test(content.substr(0, selected.start));
                         var isLastN = /^\n/.test(content.substr(selected.end, content.length));
-                        var str = '\n**YOOZ官方授权，微信号(点击可复制→)：<span data-clipboard-action="copy" data-clipboard-target="#weixinCode_content" id="weixinCode_content" class="get_price_btn_wx user-select-auto">vivian-yoooz</span>**' +
-'\n\n<img class="user-select-auto" src="/media/202103/6042f53f074d3591b8116e93/vivian-yoooz-2.jpg" alt="vivian-yoooz-2.jpg" title="YOOZ柚子二代电子烟官网,YOOZ加盟批发代理">\n\n';
+                        var str = '\n**YOOZ官方授权，微信号(点击可复制→)：<span data-clipboard-action="copy" data-clipboard-target="#weixinCode_content" title="点击即可复制微信号" id="weixinCode_content" class="get_price_btn_wx user-select-auto" style="color: #f00;">vivian-yoooz</span>**\n\n';
+                        // +'\n\n<img class="user-select-auto" src="/media/202103/6042f53f074d3591b8116e93/vivian-yoooz-2.jpg" alt="vivian-yoooz-2.jpg" title="YOOZ柚子二代电子烟官网,YOOZ加盟批发代理">\n\n';
                         
                         e.replaceSelection(str);
 

@@ -120,9 +120,13 @@ h6, .h6 {
   margin-bottom: 0;
   background-color: #000;
 }
-.clear-bottom-margin h5 {
+.clear-bottom-margin h5,
+.clear-bottom-margin h5 a {
   color: #ccc;
   line-height: 1.8;
+}
+.clear-bottom-margin h5 a:hover {
+  text-decoration: underline;
 }
 
 .margin-bottom-10 {

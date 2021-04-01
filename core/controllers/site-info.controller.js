@@ -79,7 +79,7 @@ exports.sitemap = function (req, res) {
         return siteInfoService.get(req, callback);
       },
       links: function (callback) {
-        return contentService.list(query, callback);
+        return contentService.all(query, callback);
       }
     }, function (err, results) {
     if (err) {
