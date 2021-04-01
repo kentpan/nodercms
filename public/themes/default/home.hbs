@@ -22,7 +22,7 @@
         {{#foreach lists}}
           {{#if contents}}
           <ol class="col-md-12 breadcrumb item-list">
-            <li style="font-weight: 600;">{{name}}</li>
+            <li style="font-weight: 600;">最新{{name}}</li>
             <li class="pull-right"><a href="{{path}}" style="text-decoration: underline;">查看更多</a></li>
           </ol>
           {{/if}}
@@ -30,7 +30,7 @@
               {{#foreach contents limit="10"}}
                 {{#if isArticle}}
                 <div class="" style="margin-right: 15px;margin-left: 15px;margin-bottom: 10px; padding-bottom: 10px; {{#if isArticle}}border-bottom: 1px solid #efefef;{{/if}}">
-                  <h3 class="media-heading text-overflow margin-bottom-10"><a href="{{url}}" title="{{title}}" target="_blank">{{title}}</a></h3>
+                  <h3 class="media-heading text-overflow margin-bottom-10" style="white-space: normal;"><a href="{{url}}" title="{{title}}" target="_blank">{{title}}</a></h3>
                   {{> thumb isLink="true" styles="width: 120px;"}}
                   {{!-- {{#if thumbnail}}
                     <a class="media-left" href="{{url}}" title="{{title}}" target="_blank">
@@ -88,12 +88,12 @@
     <div class="col-md-3">
       {{#if readingList.prodTotal}}
       <div class="panel panel-default">
-        <h4 class="panel-heading" style="margin: 0;">人气总排行</h4>
+        <h4 class="panel-heading" style="margin: 0;">产品总排行</h4>
         <ul class="list-group">
           {{#foreach readingList.prodTotal limit="4"}}
-            <a href="{{href}}" class="list-group-item text-overflow" style="text-align: center;">
+            <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow" style="text-align: center;">
               {{#if thumbnail}}
-                <img class="media-object" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}" width="100%">
+                <img class="media-object" src="{{thumbnail.src}}" title="{{title}}" alt="{{title}}" width="100%">
               {{/if}}
               <h6>{{title}}</h6>
             </a>
@@ -102,21 +102,21 @@
       </div>
       {{/if}}
       <div class="panel panel-default">
-        <h4 class="panel-heading" style="margin: 0;">热度总排行</h4>
+        <h4 class="panel-heading" style="margin: 0;">资讯总排行</h4>
         <ul class="list-group">
           {{#foreach readingList.total limit="5"}}
-            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+            <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
       {{#if readingList.prodMonth}}
       <div class="panel panel-default">
-        <h4 class="panel-heading" style="margin: 0;">人气月排行</h4>
+        <h4 class="panel-heading" style="margin: 0;">产品月排行</h4>
         <ul class="list-group">
           {{#foreach readingList.prodMonth limit="4"}}
             <a href="{{href}}" class="list-group-item text-overflow" style="text-align: center;">
               {{#if thumbnail}}
-                <img class="media-object" src="{{thumbnail.src}}" title="{{thumbnail.fileName}}" alt="{{thumbnail.description}}" width="100%">
+                <img class="media-object" src="{{thumbnail.src}}" title="{{title}}" alt="{{title}}" width="100%">
               {{/if}}
               <h6>{{title}}</h6>
             </a>
@@ -125,10 +125,10 @@
       </div>
       {{/if}}
       <div class="panel panel-default">
-        <h4 class="panel-heading" style="margin: 0;">热度月排行</h4>
+        <h4 class="panel-heading" style="margin: 0;">资讯月排行</h4>
         <ul class="list-group">
           {{#foreach readingList.month limit="5"}}
-            <a href="{{href}}" class="list-group-item text-overflow">{{title}}</a>
+            <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
