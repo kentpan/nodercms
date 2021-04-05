@@ -1221,7 +1221,7 @@ angular.module('controllers').controller('contentChange', ['$scope', '$state', '
      * 绑定 Alias 翻译
      */
     $scope.$watch('title', function (newTitle) {
-      if (newTitle !== $scope.oldTitle) {
+      if (newTitle !== $scope.oldTitle && !$scope._id) {
         $scope.alias = pinyin(newTitle);
       } else {
         $scope.alias = $scope.oldAlias;

@@ -57,7 +57,7 @@ module.exports = function (req, res, next) {
       if (err && !results.category) return next();
       if (err) return res.status(500).end();
       var contentFix = (content.content || '').replace(/<\/?.+?>|[\r\n]|\s+/img, '');
-      console.log(contentFix);
+      // console.log(contentFix);
       res.render(_.get(results.category, 'views.content'), {
         layout: _.get(results.category, 'views.layout'),
         siteInfo: results.siteInfo,

@@ -50,14 +50,14 @@ function createSiteMap(siteMapFile, ext, content, len) {
   fs.stat(siteMapFile + ext, function (error) {
     console.log('fs.stat ===>', error);
     if (error) {
-      fs.writeFile(siteMapFile + ext, content, function(err) {
+      fs.writeFile(siteMapFile + ext, content + os.EOL, function(err) {
         if (err) throw err;
         console.log('===========>', siteMapFile + ext + ' => ' + len  + '条站点地图生成！');
       });
     } else {
       fs.rename(siteMapFile + ext, siteMapFile + '-' + moment(new Date()).format('YYYYMMDDhhmmss')  + ext, (err) => {
         if (err) throw err;
-        fs.writeFile(siteMapFile + ext, content, function(err) {
+        fs.writeFile(siteMapFile + ext, content + os.EOL, function(err) {
           if (err) throw err;
           console.log('===========>', siteMapFile + ext + ' => ' + len  + '条站点地图新生成！');
         });
