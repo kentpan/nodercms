@@ -533,7 +533,7 @@ exports.save = function (options, callback) {
         hostList.map(function(list) {
           // contents.push(list.host + urlPath + '/' + data.alias);
           // TODO: 需要先读取文件是否为空判断开头要不要os.EOL换行，避免空文件第一次写入时第一行为空
-          exports.appendFile(list.path, list.host + urlPath + '/' + data.alias + os.EOL, function(status) {
+          exports.appendFile(list.path, os.EOL + list.host + urlPath + '/' + data.alias + os.EOL, function(status) {
             console.log(status, data, contents);
           });
           return list;

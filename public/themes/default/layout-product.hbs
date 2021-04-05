@@ -6,19 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="generator" content="NodeJS">
     <meta name="keywords" content="{{#if category}}{{category.keywords}},{{/if}}{{siteInfo.keywords}}">
-    <meta name="description" content="{{#if category}}{{category.description}} —— {{/if}}{{siteInfo.description}}">
+    <meta name="description" content="{{#if category}}{{category.description}} —— {{/if}} {{#if contentFix}}{{contentFix}}{{else}}{{siteInfo.description}}{{/if}}">
     <meta itemprop="name" content="{{ siteInfo.shareTitle }}">
     <meta itemprop="image" content="{{ siteInfo.shareImage }}">
     <meta itemprop="description" name="description" content="{{ siteInfo.shareDesc }}">
-    <meta name="format-detection" content = "telephone=no">
-    <meta name="baidu-site-verification" content="code-VaJSpTamNe" />
-    <meta name="baidu-site-verification" content="code-bigpFFKOuX" />
-    <meta name="baidu-site-verification" content="code-jtq85prCj6" />
-    <meta name="baidu-site-verification" content="code-hKmTs3FZHs" />
-    <meta name="sogou_site_verification" content="RTaOPLy2jP"/>
-    <meta name="sogou_site_verification" content="3yvfHPuHT6"/>
-    <meta name="sogou_site_verification" content="ZOsZVOLZK8"/>
-    <meta name="sogou_site_verification" content="vDzjUyCsjv"/>
+    <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="/themes/{{siteInfo.theme}}/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/themes/{{siteInfo.theme}}/assets/css/main.css" />
     <script src="/themes/{{siteInfo.theme}}/assets/js/jquery-2.2.1.min.js"></script>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="generator" content="NodeJS">
     <meta name="keywords" content="{{#if category}}{{category.keywords}},{{/if}}{{siteInfo.keywords}}">
-    <meta name="description" id="wxshare_content" content="{{#if category}}{{category.description}} —— {{/if}}{{siteInfo.description}}">
+    <meta name="description" id="wxshare_content" content="{{#if category}}{{category.description}} —— {{/if}} {{#if contentFix}}{{contentFix}}{{else}}{{siteInfo.description}}{{/if}}">
     <meta itemprop="name" content="{{ siteInfo.shareTitle }}">
     <meta itemprop="image" content="{{ siteInfo.shareImage }}">
     <meta itemprop="description" name="description" content="{{ siteInfo.shareDesc }}">

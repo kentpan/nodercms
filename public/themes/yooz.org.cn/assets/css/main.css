@@ -133,10 +133,19 @@ h6, .h6 {
   margin-bottom: 10px;
 }
 
+#content_abstract {
+  font-size: 13px;
+}
+
 .content p {
   margin: 0 0 20px 0;
   font-size: 16px;
   line-height: 1.7;
+  text-indent: 32px;
+}
+.content a {
+  color: #337ab7;
+  text-decoration: underline;
 }
 
 .content img,
@@ -441,7 +450,7 @@ h6, .h6 {
     padding: 5px;
   }
   .media-left .media-object {
-    width: 100px;
+    width: 120px;
   }
   .weixin-code #copy_btn {
     font-size: 16px;

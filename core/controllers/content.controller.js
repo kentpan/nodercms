@@ -56,8 +56,8 @@ module.exports = function (req, res, next) {
     }, function (err, results) {
       if (err && !results.category) return next();
       if (err) return res.status(500).end();
-
-      console.log(content);
+      var contentFix = (content.content || '').replace(/<\/?.+?>|[\r\n]|\s+/img, '');
+      console.log(contentFix);
       res.render(_.get(results.category, 'views.content'), {
         layout: _.get(results.category, 'views.layout'),
         siteInfo: results.siteInfo,
@@ -78,6 +78,7 @@ module.exports = function (req, res, next) {
         media: content.media,
         abstract: content.abstract,
         content: content.content,
+        contentFix: contentFix,
         tags: content.tags,
         extensions: content.extensions
       });
