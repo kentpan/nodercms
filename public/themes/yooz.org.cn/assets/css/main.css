@@ -272,6 +272,23 @@ h6, .h6 {
   content: "";
 }
 
+.yooz-warning {
+  width: 100%;
+  background-color: #000;
+  text-align: center;
+  color: #fff;
+}
+.yooz-warning strong{
+  font-size: 18px;
+  display: inline-block;
+  margin-right: 10px;
+  line-height: 40px;
+}
+.yooz-warning img{
+  height: 40px;
+  vertical-align: top;
+}
+
 .yooz-header {
   margin-bottom: 10px;
   width: 100%;
@@ -431,6 +448,10 @@ h6, .h6 {
   -moz-user-select: auto;
   -ms-user-select: auto;
   user-select: auto;
+  /* opacity: 0;
+  position: fixed;
+  z-index: -999;
+  top: -9999px; */
 }
 .weixin-code .copy_btn {
   background-color: #f00;

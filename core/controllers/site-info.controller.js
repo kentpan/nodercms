@@ -9,6 +9,7 @@ var themes = require('../../lib/themes.lib');
 var siteInfoService = require('../services/site-info.service');
 var contentService = require('../services/contents.service');
 const { log } = require('console');
+var child_process = require("child_process");
 
 /**
  * 查询网站信息
@@ -39,20 +40,21 @@ function getFullUri(req, siteInfo, cont) {
 
 function getXMLContent(req, siteInfo, cont) {
   return `
-  <sitemap>
+  <url>
     <loc>
       ${req.protocol + '://' + siteInfo.domain + cont.url}
     </loc>
     <lastmod>${moment(cont.date).format('YYYY-MM-DD hh:mm:ss')}</lastmod>
-  </sitemap>`;
+  </url>`;
 }
-function createSiteMap(siteMapFile, ext, content, len) {
+function createSiteMap(siteMapFile, ext, content, len, cb) {
   fs.stat(siteMapFile + ext, function (error) {
     console.log('fs.stat ===>', error);
     if (error) {
       fs.writeFile(siteMapFile + ext, content + os.EOL, function(err) {
         if (err) throw err;
         console.log('===========>', siteMapFile + ext + ' => ' + len  + '条站点地图生成！');
+        cb && cb();
       });
     } else {
       fs.rename(siteMapFile + ext, siteMapFile + '-' + moment(new Date()).format('YYYYMMDDhhmmss')  + ext, (err) => {
@@ -60,6 +62,7 @@ function createSiteMap(siteMapFile, ext, content, len) {
         fs.writeFile(siteMapFile + ext, content + os.EOL, function(err) {
           if (err) throw err;
           console.log('===========>', siteMapFile + ext + ' => ' + len  + '条站点地图新生成！');
+          cb && cb();
         });
       });
     }
@@ -113,21 +116,34 @@ exports.sitemap = function (req, res) {
     });
     var len = mapList.length;
     // 生成.txt
-    createSiteMap(siteMapFile, ext, mapList.join(os.EOL), len);
+    createSiteMap(siteMapFile, ext, mapList.join(os.EOL), len, function () {
+      var curl = 'curl "https://data.zhanzhang.sm.cn/push?site=www.yooz.org.cn&user_name=ayue222@126.com&resource_name=mip_add&token=TI_6d3cf74188b7385a14b8e45227eb5751" --data-binary @' + siteMapFile + ext;
+      child_process.exec(curl, function(err, stdout, stderr) {
+          console.log(stdout, '神马siteMap推送成功');
+      });
+      curl = 'curl "http://data.zz.baidu.com/urls?site=www.yooz.org.cn&token=F4YKzs49hlXHkywV" --data-binary @' + siteMapFile + ext;
+      child_process.exec(curl, function(err, stdout, stderr) {
+          console.log(stdout, '百度siteMap推送成功');
+      });
+    });
 
-    ext = '.xml';
+    var xmlExt = '.xml';
     mapList = [];
     contents.forEach(function(cont) {
       mapList.push(getXMLContent(req, siteInfo, cont));
     });
 
-    mapList = `<sitemapindex>${mapList.join('')}
-</sitemapindex>
+    mapList = `<?xml version="1.0" encoding="utf-8"?>
+<urlset>${mapList.join('')}
+</urlset>
     `;
     // 生成.xml
-    createSiteMap(siteMapFile, ext, mapList, len);
+    createSiteMap(siteMapFile, xmlExt, mapList, len);
 
-    res.status(200).end(len + ' 条站点地图已生成！');
+    res.status(200).json({
+        status: 0,
+        message: len + ' 条站点地图已生成！'
+      });
   });
 };
 
