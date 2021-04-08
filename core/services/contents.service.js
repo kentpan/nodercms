@@ -381,16 +381,8 @@ exports.save = function (options, callback) {
       path: path.resolve(__dirname, '../../public/site.yooz.org.cn.txt')
     },
     {
-      host: 'http://www.yoozworld.co',
-      path: path.resolve(__dirname, '../../public/site.yoozworld.co.txt')
-    },
-    {
-      host: 'http://www.yooz.ren',
-      path: path.resolve(__dirname, '../../public/site.yooz.ren.txt')
-    },
-    {
-      host: 'http://www.yooz.net.cn',
-      path: path.resolve(__dirname, '../../public/site.yooz.net.cn.txt')
+      host: 'http://www.yooz8.com',
+      path: path.resolve(__dirname, '../../public/site.yooz8.com.txt')
     }
   ];
   var categoryMap = {

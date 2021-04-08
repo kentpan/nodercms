@@ -22,3 +22,4 @@ public/media/*
 public/themes/*
 !public/themes/default
 !public/themes/yooz.org.cn
+!public/themes/yooz8.com

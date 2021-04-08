@@ -33,16 +33,8 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
         value: 'www.yooz.org.cn'
       },
       {
-        name: 'www.yoozworld.co',
-        value: 'www.yoozworld.co'
-      },
-      {
-        name: 'www.yooz.ren',
-        value: 'www.yooz.ren'
-      },
-      {
-        name: 'www.yooz.net.cn',
-        value: 'www.yooz.net.cn'
+        name: 'www.yooz8.com',
+        value: 'www.yooz8.com'
       }
     ];
     for (var index = 0; index < domainList.length; index++) {
@@ -54,7 +46,7 @@ angular.module('controllers').controller('siteInfo', ['$scope', '$http', 'accoun
       }
     }
     domainList = domainList.splice(currentIndex, 1).concat(domainList);
-    
+
     $scope.createSiteMap = function () {
       if (confirm('确定要重新生成网站地图？一旦重新生成可能会影响站点SEO效果，请谨慎操作！')) {
         return $http.get('/api/sitemap', {
