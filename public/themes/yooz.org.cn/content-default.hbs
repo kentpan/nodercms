@@ -32,7 +32,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">资讯总排行</div>
         <ul class="list-group">
-          {{#foreach readingList.total limit="5"}}
+          {{#foreach readingList.total limit="10"}}
             <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
@@ -40,7 +40,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">资讯月排行</div>
         <ul class="list-group">
-          {{#foreach readingList.month limit="5"}}
+          {{#foreach readingList.month limit="10"}}
             <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>

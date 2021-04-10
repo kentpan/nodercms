@@ -131,6 +131,7 @@ exports.list = function (options, callback) {
     },
     function (count, callback) {
       contentsModel.find(query)
+        // .sort('status -extensions.types -date')
         .sort('status -date')
         .skip((currentPage - 1) * pageSize)
         .limit(pageSize)

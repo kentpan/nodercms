@@ -30,7 +30,7 @@ $(document).ready(function(){
                     title: {{#if wxshare_title}}'{{wxshare_title}}'{{else}}(document.getElementById('title_wxshare') && document.getElementById('title_wxshare').innerHTML) || document.title{{/if}},
                     image_url: location.protocol + '//' + location.hostname + {{#if wxshare_image}}'{{wxshare_image.src}}'{{else}}'/themes/yooz.org.cn/assets/img/yooz-logo.png'{{/if}},
                     linkUrl: originUrl,
-                    content: {{#if wxshare_content}}'{{wxshare_content}}'{{else}}(document.getElementById('content_abstract') && document.getElementById('content_abstract').innerHTML) || (document.getElementById('wxshare_content') && document.getElementById('wxshare_content').content) || ''{{/if}},
+                    content: {{#if wxshare_content}}`{{wxshare_content}}`{{else}}`${(document.getElementById('content_abstract') && document.getElementById('content_abstract').innerHTML) || (document.getElementById('wxshare_content') && document.getElementById('wxshare_content').content) || ''}`{{/if}},
                     wx: {
                         appId: res.data.appId,
                         timestamp: res.data.timestamp,
