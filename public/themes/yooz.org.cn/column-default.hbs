@@ -43,19 +43,34 @@
       <div class="panel panel-default">
         <div class="panel-heading">资讯总排行</div>
         <ul class="list-group">
-          {{#foreach readingList.total limit="5"}}
+          {{#foreach readingList.total limit="10"}}
             <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
       </div>
+      {{#if readingList.prodTotal}}
       <div class="panel panel-default">
+        <h4 class="panel-heading" style="margin: 0;">产品总排行</h4>
+        <ul class="list-group">
+          {{#foreach readingList.prodTotal limit="10"}}
+          <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow" style="text-align: center;">
+            {{#if thumbnail}}
+            <img class="media-object" src="{{thumbnail.src}}" title="{{title}}" alt="{{title}}" width="100%">
+            {{/if}}
+            <h6>{{title}}</h6>
+          </a>
+          {{/foreach}}
+        </ul>
+      </div>
+      {{/if}}
+      {{!-- <div class="panel panel-default">
         <div class="panel-heading">资讯月排行</div>
         <ul class="list-group">
-          {{#foreach readingList.month limit="5"}}
+          {{#foreach readingList.month limit="10"}}
             <a href="{{href}}" title="{{title}}" class="list-group-item text-overflow">{{title}}</a>
           {{/foreach}}
         </ul>
-      </div>
+      </div> --}}
       {{!-- <div class="panel panel-default">
         <div class="panel-heading">栏目热度本周排行</div>
         <ul class="list-group">

@@ -83,6 +83,12 @@ module.exports = function (req, res, next) {
       // },
       localReadingMonth: function (callback) {
         listsService.reading({ _id: category._id, sort: '-reading.month' }, callback);
+      },
+      readingProdTotal: function (callback) {
+        listsService.reading({path: '/product'}, callback);
+      },
+      readingProdMonth: function (callback) {
+        listsService.reading({ path: '/product', sort: '-reading.month' }, callback);
       }
     }, function (err, results) {
       if (err) return res.status(500).end();
@@ -97,7 +103,9 @@ module.exports = function (req, res, next) {
           total: results.localReadingTotal,
           // day: results.localReadingDay,
           // week: results.localReadingWeek,
-          month: results.localReadingMonth
+          month: results.localReadingMonth,
+          prodTotal: results.readingProdTotal,
+          prodMonth: results.readingProdMonth
         }
       });
     });

@@ -47,7 +47,7 @@ exports.all = function (callback) {
       async.map(categories, function (category, callback) {
         if (category.node) {
           contents.find({ category: { $in: category.node }, status: 'pushed', deleted: false })
-            .sort('-date')
+            .sort('-extensions.types -date')
             .limit(50)
             .select('category title alias user date reading thumbnail abstract extensions')
             .populate('category', 'name path')
@@ -80,7 +80,7 @@ exports.all = function (callback) {
             });
         } else {
           contents.find({ category: category._id, status: 'pushed', deleted: false, date: { $lte: new Date() } })
-            .sort('-date')
+            .sort('-extensions.types -date')
             .limit(50)
             .select('category title alias user date reading thumbnail abstract extensions')
             .populate('category', 'name path')
@@ -293,7 +293,7 @@ exports.reading = function (options, callback) {
         query.category = { $in: columnIds };
 
         contents.find(query)
-          .sort(sort)
+          .sort('-extensions.types ' + sort)
           .limit(limit)
           .select('category title alias user date reading thumbnail abstract extensions')
           .populate('category', 'name path')
@@ -326,7 +326,7 @@ exports.reading = function (options, callback) {
     });
   } else {
     contents.find(query)
-      .sort(sort)
+      .sort('-extensions.types ' + sort)
       .limit(limit)
       .select('category title alias user date reading thumbnail abstract extensions')
       .populate('category', 'name path')
