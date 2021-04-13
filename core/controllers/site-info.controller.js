@@ -41,9 +41,7 @@ function getFullUri(req, siteInfo, cont) {
 function getXMLContent(req, siteInfo, cont) {
   return `
   <url>
-    <loc>
-      ${req.protocol + '://' + siteInfo.domain + cont.url}
-    </loc>
+    <loc>${req.protocol + '://' + siteInfo.domain + cont.url}</loc>
     <lastmod>${moment(cont.date).format('YYYY-MM-DD hh:mm:ss')}</lastmod>
   </url>`;
 }
@@ -134,7 +132,7 @@ exports.sitemap = function (req, res) {
     });
 
     mapList = `<?xml version="1.0" encoding="utf-8"?>
-<urlset>${mapList.join('')}
+<urlset content_method="full">${mapList.join('')}
 </urlset>
     `;
     // 生成.xml

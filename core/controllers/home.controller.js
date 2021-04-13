@@ -40,6 +40,15 @@ module.exports = function (req, res) {
     }
   }, function (err, results) {
     if (err) return res.status(500).end();
+    // var lists = results.lists;
+    // lists = lists.map(function(list) {
+    //   var contents = list.contents.sort(function(a, b) {
+    //     return (a.extensions && b.extensions) ? (a.extensions.types > b.extensions.types) ? 1: -1 : -1;
+    //   });
+    //   console.log(contents);
+    //   list.contents = contents;
+    //   return list;
+    // });
     res.render('home', {
       layout: 'layout-default',
       siteInfo: results.siteInfo,

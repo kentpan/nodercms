@@ -163,6 +163,7 @@ exports.list = function (options, callback) {
   ], function (err, count, contents) {
     if (err) return callback(err);
 
+
     var result = {
       contents: contents,
       pages: Math.ceil(count / pageSize),

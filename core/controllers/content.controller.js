@@ -57,6 +57,7 @@ module.exports = function (req, res, next) {
       if (err && !results.category) return next();
       if (err) return res.status(500).end();
       var contentFix = (content.content || '').replace(/<\/?.+?>|[\r\n]|\s+/img, '');
+      // console.log(content.abstract, '=====>', (content.abstract || '').split('\n').join('<br/>'));
       // console.log(contentFix);
       res.render(_.get(results.category, 'views.content'), {
         layout: _.get(results.category, 'views.layout'),
@@ -76,7 +77,7 @@ module.exports = function (req, res, next) {
         reading: content.reading,
         thumbnail: content.thumbnail,
         media: content.media,
-        abstract: content.abstract,
+        abstract: (content.abstract || '').split('\n').join('<br/>'),
         content: content.content,
         contentFix: contentFix,
         tags: content.tags,
